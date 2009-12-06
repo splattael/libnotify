@@ -1,0 +1,32 @@
+= Libnotify
+
+Ruby binding for libnotify using FFI.
+
+== Usage
+
+  require 'libnotify'
+
+  # Using a block
+  Libnotify.new do |notify|
+    notify.summary = "world"
+    notify.body = "hello"
+    notify.timeout = 1.5        # or 1000ms, nil, false
+    notify.urgency = :critical  # or :low, :normal, :critical
+    notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
+    notify.show!
+  end
+
+  # Alternative syntax
+  Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
+
+== Install via gemcutter
+  gem install gemcutter
+  gem tumble
+  gem install libnotify
+
+== Authors
+* Peter Suschlik
+
+== TODO
+
+* Tests!
