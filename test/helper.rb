@@ -6,5 +6,6 @@ require 'libnotify'
 
 Riot.reporter = RiotNotifier::Libnotify
 
-#require 'rr'
-#Riot::Situation.send :include, RR::Adapters::RRMethods
+require 'rr'
+
+Riot::Situation.send :include, RR::Adapters::RRMethods

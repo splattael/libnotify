@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
 
   gem.add_development_dependency "riot"
   gem.add_development_dependency "riot_notifier"
-  #gem.add_development_dependency "rr"
+  gem.add_development_dependency "rr"
 
   gem.test_files = Dir.glob('test/test_*.rb')
 end
@@ -33,7 +33,7 @@ Rake::TestTask.new(:test) do |test|
   test.test_files = FileList.new('test/test_*.rb')
   test.libs << 'test'
   test.verbose = true
-  test.warning = true
+  #test.warning = true
 end
 
 namespace :test do

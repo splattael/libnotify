@@ -6,7 +6,16 @@ context Libnotify do
   asserts("responds to new").respond_to(:new)
   asserts("responds to show").respond_to(:show)
 
-  # TODO test delagation to API
+  asserts("#new calls API#new") do
+    mock(Libnotify::API).new(hash_including(:body => "test"))
+    Libnotify.new(:body => "test")
+    RR.verify
+  end
+  asserts("#show calls API#show") do
+    mock(Libnotify::API).show(hash_including(:body => "test"))
+    Libnotify.show(:body => "test")
+    RR.verify
+  end
 end
 
 context Libnotify::API do
