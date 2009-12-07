@@ -6,7 +6,7 @@ Ruby binding for libnotify using FFI.
 
   require 'libnotify'
 
-  # Using a block
+  # Block syntax
   Libnotify.new do |notify|
     notify.summary = "world"
     notify.body = "hello"
@@ -16,8 +16,13 @@ Ruby binding for libnotify using FFI.
     notify.show!
   end
 
-  # Alternative syntax
+  # Hash syntax
   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
+
+  # Mixed syntax
+  Libnotify.show(options) do |n|
+    n.timeout = 1.5     # overrides :timeout in options
+  end
 
 == Install via gemcutter
   gem install gemcutter
@@ -29,4 +34,4 @@ Ruby binding for libnotify using FFI.
 
 == TODO
 
-* Tests!
+* Mock FFI calls

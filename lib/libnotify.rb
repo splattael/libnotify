@@ -28,7 +28,8 @@ module Libnotify
 
   class API
     include FFI
-    attr_accessor :name, :summary, :body, :icon_path, :timeout, :urgency
+    attr_reader :timeout
+    attr_accessor :summary, :body, :icon_path, :urgency
 
     def initialize(options = {}, &block)
       self.summary = self.body = " " # Empty strings gives warnings...
@@ -46,7 +47,7 @@ module Libnotify
       notify_init(self.class.to_s) or raise "notify_init failed"
       notify = notify_notification_new(summary, body, icon_path, nil)
       notify_notification_set_urgency(notify, urgency)
-      notify_notification_set_timeout(notify, timeout)
+      notify_notification_set_timeout(notify, timeout || -1)
       notify_notification_show(notify, nil)
     ensure
       notify_uninit
@@ -63,7 +64,7 @@ module Libnotify
           timeout * 1000
         end
       when NilClass, FalseClass
-        -1
+        nil
       else
         timeout.to_s.to_i
       end
