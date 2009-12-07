@@ -10,8 +10,8 @@ Ruby binding for libnotify using FFI.
   Libnotify.new do |notify|
     notify.summary = "world"
     notify.body = "hello"
-    notify.timeout = 1.5        # or 1000ms, nil, false
-    notify.urgency = :critical  # or :low, :normal, :critical
+    notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
+    notify.urgency = :critical  # :low, :normal, :critical
     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
     notify.show!
   end

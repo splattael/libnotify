@@ -1,6 +1,3 @@
-
-
-require 'rubygems'
 require 'ffi'
 
 module Libnotify
@@ -34,7 +31,7 @@ module Libnotify
     attr_accessor :name, :summary, :body, :icon_path, :timeout, :urgency
 
     def initialize(options = {}, &block)
-      self.summary = self.body = " "
+      self.summary = self.body = " " # Empty strings gives warnings...
       self.urgency = :normal
       self.timeout = nil
       options.each { |key, value| send("#{key}=", value) if respond_to?(key) }
@@ -47,7 +44,7 @@ module Libnotify
 
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
-      notify = FFI.notify_notification_new(summary, body, icon_path, nil)
+      notify = notify_notification_new(summary, body, icon_path, nil)
       notify_notification_set_urgency(notify, urgency)
       notify_notification_set_timeout(notify, timeout)
       notify_notification_show(notify, nil)
@@ -57,18 +54,18 @@ module Libnotify
 
     def timeout=(timeout)
       @timeout = case timeout
-      when NilClass, FalseClass
-        -1
       when Float
         (timeout * 1000).to_i
       when Fixnum
-        if timeout > 100 # assume miliseconds
+        if timeout >= 100 # assume miliseconds
           timeout
         else
           timeout * 1000
         end
+      when NilClass, FalseClass
+        -1
       else
-        timeout.to_i
+        timeout.to_s.to_i
       end
     end
   end
@@ -79,8 +76,8 @@ if $0 == __FILE__
   Libnotify.new do |notify|
     notify.summary = "world"
     notify.body = "hello"
-    notify.timeout = 1.5        # or 1000ms, nil, false
-    notify.urgency = :critical  # or :low, :normal, :critical
+    notify.timeout = 1.5        # 1.5 (sec), 1000 (ms), "2", nil, false
+    notify.urgency = :critical  # :low, :normal, :critical
     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
     notify.show!
   end
