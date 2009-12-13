@@ -24,9 +24,7 @@ Ruby binding for libnotify using FFI.
     n.timeout = 1.5     # overrides :timeout in options
   end
 
-== Install via gemcutter
-  gem install gemcutter
-  gem tumble
+== Install
   gem install libnotify
 
 == Authors
