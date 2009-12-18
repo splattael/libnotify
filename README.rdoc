@@ -24,8 +24,13 @@ Ruby binding for libnotify using FFI.
     n.timeout = 1.5     # overrides :timeout in options
   end
 
-== Install
+== Installation
+
   gem install libnotify
+
+You need libnotify. On Debian you can just do:
+
+  apt-get install libnotify1
 
 == Authors
 * Peter Suschlik

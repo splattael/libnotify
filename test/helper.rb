@@ -4,7 +4,7 @@ require 'riot_notifier'
 
 require 'libnotify'
 
-Riot.reporter = RiotNotifier::Libnotify
+Riot.reporter = RiotNotifier
 
 require 'rr'
 
