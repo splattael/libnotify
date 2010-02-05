@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{libnotify}
-  s.version = "0.0.5"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Suschlik"]
@@ -16,12 +16,12 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
-     ".watchr",
      "README.rdoc",
      "Rakefile",
      "VERSION",
      "lib/libnotify.rb",
      "libnotify.gemspec",
+     "test.watchr",
      "test/helper.rb",
      "test/test_libnotify.rb"
   ]
