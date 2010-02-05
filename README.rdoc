@@ -1,6 +1,6 @@
 = Libnotify
 
-Ruby binding for libnotify using FFI.
+Ruby bindings for libnotify using FFI.
 
 Source[http://github.com/splattael/libnotify] |
 RDoc[http://rdoc.info/projects/splattael/libnotify] |
@@ -41,4 +41,6 @@ You need libnotify. On Debian you can just do:
 
 == TODO
 
-* Mock FFI calls
+* Empty strings give warnings (lib/libnotify.rb:46)
+* Simplify timeout= (lib/libnotify.rb:64)
+* Mock FFI calls (test/test_libnotify.rb:60)

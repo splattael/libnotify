@@ -1,5 +1,8 @@
 require 'ffi'
 
+# Ruby bindings for libnotify using FFI.
+#
+# See README.rdoc for usage examples.
 module Libnotify
 
   def self.new(*args, &block)
@@ -10,6 +13,7 @@ module Libnotify
     API.show(*args, &block)
   end
 
+  # Raw FFI bindings.
   module FFI
     extend ::FFI::Library
 
@@ -28,20 +32,23 @@ module Libnotify
 
   class API
     include FFI
+
     attr_reader :timeout
     attr_accessor :summary, :body, :icon_path, :urgency
 
     def initialize(options = {}, &block)
-      self.summary = self.body = " " # Empty strings gives warnings...
-      self.urgency = :normal
-      self.timeout = nil
+      set_defaults
       options.each { |key, value| send("#{key}=", value) if respond_to?(key) }
       yield(self) if block_given?
     end
 
-    def self.show(*args, &block)
-      new(*args, &block).show!
+    def set_defaults
+      # TODO Empty strings give warnings
+      self.summary = self.body = " "
+      self.urgency = :normal
+      self.timeout = nil
     end
+    private :set_defaults
 
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
@@ -54,6 +61,7 @@ module Libnotify
     end
 
     def timeout=(timeout)
+      # TODO Simplify timeout=
       @timeout = case timeout
       when Float
         (timeout * 1000).to_i
@@ -69,19 +77,11 @@ module Libnotify
         timeout.to_s.to_i
       end
     end
+
+    def self.show(*args, &block)
+      new(*args, &block).show!
+    end
+
   end
 
-end
-
-if $0 == __FILE__
-  Libnotify.new do |notify|
-    notify.summary = "world"
-    notify.body = "hello"
-    notify.timeout = 1.5        # 1.5 (sec), 1000 (ms), "2", nil, false
-    notify.urgency = :critical  # :low, :normal, :critical
-    notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
-    notify.show!
-  end
-
-  Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
 end
