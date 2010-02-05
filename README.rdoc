@@ -43,4 +43,4 @@ You need libnotify. On Debian you can just do:
 
 * Empty strings give warnings (lib/libnotify.rb:46)
 * Simplify timeout= (lib/libnotify.rb:64)
-* Mock FFI calls (test/test_libnotify.rb:60)
+* Mock FFI calls with rrriot. (test/test_libnotify.rb:60)
