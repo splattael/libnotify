@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/libnotify.rb",
+     "libnotify.gemspec",
      "test/helper.rb",
      "test/test_libnotify.rb"
   ]
