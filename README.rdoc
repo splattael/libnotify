@@ -2,6 +2,10 @@
 
 Ruby binding for libnotify using FFI.
 
+Source[http://github.com/splattael/libnotify] |
+RDoc[http://rdoc.info/projects/splattael/libnotify] |
+Metrics[http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fsplattael%libnotify.git]
+
 == Usage
 
   require 'libnotify'
