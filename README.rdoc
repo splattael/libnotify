@@ -4,7 +4,7 @@ Ruby bindings for libnotify using FFI.
 
 Source[http://github.com/splattael/libnotify] |
 RDoc[http://rdoc.info/projects/splattael/libnotify] |
-Metrics[http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fsplattael%libnotify.git]
+Metrics[http://getcaliper.com/caliper/project?repo=http%3A%2F%2Fgemcutter.org%2Fgems%2Flibnotify]
 
 == Usage
 
