@@ -32,7 +32,7 @@ Metrics[http://getcaliper.com/caliper/project?repo=http%3A%2F%2Fgemcutter.org%2F
 
   gem install libnotify
 
-You need libnotify. On Debian you can just do:
+You'll need libnotify. On Debian just type:
 
   apt-get install libnotify1
 
