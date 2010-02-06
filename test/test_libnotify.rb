@@ -7,14 +7,12 @@ context Libnotify do
   asserts("responds to show").respond_to(:show)
 
   asserts("#new calls API#new") do
-    mock(Libnotify::API).new(hash_including(:body => "test"))
+    mock(Libnotify::API).new(hash_including(:body => "test")) { true }
     Libnotify.new(:body => "test")
-    RR.verify
   end
   asserts("#show calls API#show") do
-    mock(Libnotify::API).show(hash_including(:body => "test"))
+    mock(Libnotify::API).show(hash_including(:body => "test")) { true }
     Libnotify.show(:body => "test")
-    RR.verify
   end
 end
 
@@ -59,13 +57,18 @@ context Libnotify::API do
 
   # TODO Mock FFI calls with rrriot.
   context "show!" do
-    setup { topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg") }
+    setup do
+      topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg")
+    end
 
-    [ :low, :normal, :critical ].each do |urgency|
-      asserts("with urgency #{urgency}") do
-        topic.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM}"
-        topic.body = defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?'
-        topic.urgency = urgency; topic.show!
+    context "for real" do
+      [ :low, :normal, :critical ].each do |urgency|
+        asserts("with urgency #{urgency}") do
+          topic.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM}"
+          topic.body = defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?'
+          topic.urgency = urgency
+          topic.show!
+        end
       end
     end
   end

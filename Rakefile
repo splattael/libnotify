@@ -16,7 +16,7 @@ begin
 
     gem.add_dependency "ffi"
 
-    gem.add_development_dependency "riot"
+    gem.add_development_dependency "riot", ">= 0.1.12.pre"
     gem.add_development_dependency "riot_notifier", ">= 0.0.7"
     gem.add_development_dependency "rr"
 
