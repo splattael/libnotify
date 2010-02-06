@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/rdoctask'
+require 'rubygems'
 
 begin
   require 'jeweler'
@@ -58,4 +59,13 @@ end
 desc "Find whitespace at line ends"
 task :eol do
   system "grep -nrE ' +$' *"
+end
+
+desc "Display TODOs"
+task :todo do
+  `grep -Inr TODO lib test`.each do |line|
+    line.scan(/^(.*?:.*?):\s*#\s*TODO\s*(.*)$/) do |(file, todo)|
+      puts "* #{todo} (#{file})"
+    end
+  end
 end

@@ -57,7 +57,7 @@ context Libnotify::API do
     asserts("with to_s.to_i") { topic.timeout = :"2 seconds"; topic.timeout }.equals(2)
   end
 
-  # TODO mock this!
+  # TODO Mock FFI calls with rrriot.
   context "show!" do
     setup { topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg") }
 

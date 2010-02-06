@@ -1,6 +1,10 @@
 = Libnotify
 
-Ruby binding for libnotify using FFI.
+Ruby bindings for libnotify using FFI.
+
+Source[http://github.com/splattael/libnotify] |
+RDoc[http://rdoc.info/projects/splattael/libnotify] |
+Metrics[http://getcaliper.com/caliper/project?repo=http%3A%2F%2Fgemcutter.org%2Fgems%2Flibnotify]
 
 == Usage
 
@@ -28,7 +32,7 @@ Ruby binding for libnotify using FFI.
 
   gem install libnotify
 
-You need libnotify. On Debian you can just do:
+You'll need libnotify. On Debian just type:
 
   apt-get install libnotify1
 
@@ -37,4 +41,6 @@ You need libnotify. On Debian you can just do:
 
 == TODO
 
-* Mock FFI calls
+* Empty strings give warnings (lib/libnotify.rb:46)
+* Simplify timeout= (lib/libnotify.rb:64)
+* Mock FFI calls with rrriot. (test/test_libnotify.rb:60)
