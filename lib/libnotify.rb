@@ -17,11 +17,6 @@ module Libnotify
   module FFI
     extend ::FFI::Library
 
-    def self.ffi_lib(libs)
-      loaded = libs.detect { |lib| super(lib) rescue LoadError nil }
-      raise "Could not load libnotify via #{libs.inspect}" unless loaded
-    end
-
     ffi_lib %w(libnotify libnotify.so libnotify.so.1)
 
     enum :urgency, [ :low, :normal, :critical ]

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Suschlik"]
-  s.date = %q{2010-02-05}
+  s.date = %q{2010-02-16}
   s.email = %q{peter-libnotify@suschlik.de}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -39,21 +39,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ffi>, [">= 0"])
-      s.add_development_dependency(%q<riot>, [">= 0"])
+      s.add_runtime_dependency(%q<ffi>, [">= 0.6.2"])
+      s.add_development_dependency(%q<riot>, [">= 0.1.12.pre"])
       s.add_development_dependency(%q<riot_notifier>, [">= 0.0.7"])
-      s.add_development_dependency(%q<rr>, [">= 0"])
     else
-      s.add_dependency(%q<ffi>, [">= 0"])
-      s.add_dependency(%q<riot>, [">= 0"])
+      s.add_dependency(%q<ffi>, [">= 0.6.2"])
+      s.add_dependency(%q<riot>, [">= 0.1.12.pre"])
       s.add_dependency(%q<riot_notifier>, [">= 0.0.7"])
-      s.add_dependency(%q<rr>, [">= 0"])
     end
   else
-    s.add_dependency(%q<ffi>, [">= 0"])
-    s.add_dependency(%q<riot>, [">= 0"])
+    s.add_dependency(%q<ffi>, [">= 0.6.2"])
+    s.add_dependency(%q<riot>, [">= 0.1.12.pre"])
     s.add_dependency(%q<riot_notifier>, [">= 0.0.7"])
-    s.add_dependency(%q<rr>, [">= 0"])
   end
 end
 
