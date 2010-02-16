@@ -27,7 +27,7 @@ module Libnotify
   #     n.show!
   #   end
   #
-  # @param [Hash] aptions  options creating a notification
+  # @param [Hash] options  options creating a notification
   # @option options [String] :summary (' ') summary/title of the notification
   # @option options [String] :body (' ') the body
   # @option options [Fixnum, Float, nil, FalseClass, String] :timeout (nil) display duration of the notification.
