@@ -18,6 +18,7 @@ begin
 
     gem.add_development_dependency "riot", ">= 0.1.12.pre"
     gem.add_development_dependency "riot_notifier", ">= 0.0.7"
+    gem.add_development_dependency "yard"
 
     gem.test_files = Dir.glob('test/test_*.rb')
   end
@@ -38,15 +39,18 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-# RDoc
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rd|
-  rd.title = "Riot Notifier"
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc", "lib/*.rb")
-  rd.rdoc_dir = "doc"
+# Yard
+begin
+  require 'yard'
+  YARD::Rake::YardocTask.new
+rescue LoadError
+  task :yardoc do
+    abort "YARD is not available. In order to run yardoc, you must: sudo gem install yard"
+  end
 end
 
+desc "Alias for `rake yard`"
+task :doc => :yard
 
 # Misc
 desc "Tag files for vim"

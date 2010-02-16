@@ -11,14 +11,14 @@ Metrics[http://getcaliper.com/caliper/project?repo=http%3A%2F%2Fgemcutter.org%2F
   require 'libnotify'
 
   # Block syntax
-  Libnotify.new do |notify|
+  n = Libnotify.new do |notify|
     notify.summary = "world"
     notify.body = "hello"
     notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
     notify.urgency = :critical  # :low, :normal, :critical
     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
-    notify.show!
   end
+  n.show!
 
   # Hash syntax
   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)

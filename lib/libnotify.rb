@@ -3,14 +3,64 @@ require 'ffi'
 # Ruby bindings for libnotify using FFI.
 #
 # See README.rdoc for usage examples.
+#
+# @see README.rdoc
+# @see Libnotify.new
+# @author Peter Suschlik
 module Libnotify
 
-  def self.new(*args, &block)
-    API.new(*args, &block)
+  # Creates a notification.
+  #
+  # @example Block syntax
+  #   n = Libnotify.new do |notify|
+  #     notify.summary = "world"
+  #     notify.body = "hello"
+  #     notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
+  #     notify.urgency = :critical  # :low, :normal, :critical
+  #     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
+  #   end
+  #   n.show!
+  # 
+  # @example Mixed syntax
+  #   Libnotify.new(options) do |n|
+  #     n.timeout = 1.5     # overrides :timeout in options
+  #     n.show!
+  #   end
+  #
+  # @param [Hash] aptions  options creating a notification
+  # @option options [String] :summary (' ') summary/title of the notification
+  # @option options [String] :body (' ') the body
+  # @option options [Fixnum, Float, nil, FalseClass, String] :timeout (nil) display duration of the notification.
+  #   Use +false+ or +nil+ for no timeout.
+  # @option options [Symbol] :urgency (:normal) the urgency of the notification.
+  #   Possible values are: +:low+, +:normal+ and +:critical+
+  # @option options [String] :icon_path path the an icon displayed.
+  #
+  # @yield [notify]   passes the notification object
+  # @yieldparam [API] notify the notification object
+  #
+  # @return [API] the notification object
+  def self.new(options={}, &block)
+    API.new(options, &block)
   end
 
-  def self.show(*args, &block)
-    API.show(*args, &block)
+  # Shows a notification. It takes the same +options+ as Libnotify.new.
+  #
+  # @example Block syntax
+  #   Libnotify.show do |notify|
+  #     notify.summary = "world"
+  #     notify.body = "hello"
+  #     notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
+  #     notify.urgency = :critical  # :low, :normal, :critical
+  #     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
+  #   end
+  #
+  # @example Hash syntax
+  #   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
+  #
+  # @see Libnotify.new
+  def self.show(options={}, &block)
+    API.show(options, &block)
   end
 
   # Raw FFI bindings.
@@ -36,20 +86,25 @@ module Libnotify
     attr_reader :timeout
     attr_accessor :summary, :body, :icon_path, :urgency
 
-    def initialize(options = {}, &block)
+    # Creates a notification object.
+    #
+    # @see Libnotify.new
+    def initialize(options={}, &block)
       set_defaults
       options.each { |key, value| send("#{key}=", value) if respond_to?(key) }
       yield(self) if block_given?
     end
 
     def set_defaults
-      # TODO Empty strings give warnings
-      self.summary = self.body = " "
+      self.summary = self.body = ' '
       self.urgency = :normal
       self.timeout = nil
     end
     private :set_defaults
 
+    # Shows a notification.
+    #
+    # @see Libnotify.show
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
       notify = notify_notification_new(summary, body, icon_path, nil)
@@ -60,8 +115,8 @@ module Libnotify
       notify_uninit
     end
 
+    # @todo Simplify timeout=
     def timeout=(timeout)
-      # TODO Simplify timeout=
       @timeout = case timeout
       when Float
         (timeout * 1000).to_i
@@ -78,8 +133,12 @@ module Libnotify
       end
     end
 
-    def self.show(*args, &block)
-      new(*args, &block).show!
+    # Creates and shows a notification. It's a shortcut for +Libnotify.new(options).show!+.
+    #
+    # @see Libnotify.show
+    # @see Libnotify.new
+    def self.show(options={}, &block)
+      new(options, &block).show!
     end
 
   end
