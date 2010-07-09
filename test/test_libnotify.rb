@@ -3,8 +3,8 @@ require 'helper'
 context Libnotify do
   setup { Libnotify }
 
-  asserts("responds to new").respond_to(:new)
-  asserts("responds to show").respond_to(:show)
+  asserts_topic("responds to new").respond_to(:new)
+  asserts_topic("responds to show").respond_to(:show)
 
   asserts("#new calls API#new") do
     mock(Libnotify::API).new(hash_including(:body => "test")) { true }
