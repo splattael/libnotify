@@ -111,8 +111,6 @@ module Libnotify
       notify_notification_set_urgency(notify, urgency)
       notify_notification_set_timeout(notify, timeout || -1)
       notify_notification_show(notify, nil)
-    ensure
-      notify_uninit
     end
 
     # @todo Simplify timeout=
