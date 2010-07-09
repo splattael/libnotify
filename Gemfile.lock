@@ -1,0 +1,51 @@
+--- 
+dependencies: 
+  yard: 
+    group: 
+    - :test
+    version: ">= 0"
+  jeweler: 
+    group: 
+    - :test
+    version: ">= 0"
+  ffi: 
+    group: 
+    - :default
+    version: ">= 0.6.2"
+  riot_notifier: 
+    group: 
+    - :test
+    version: ">= 0"
+  riot: 
+    group: 
+    - :test
+    version: = 0.11.2
+specs: 
+- rake: 
+    version: 0.8.7
+- ffi: 
+    version: 0.6.3
+- json_pure: 
+    version: 1.4.3
+- gemcutter: 
+    version: 0.5.0
+- git: 
+    version: 1.2.5
+- rubyforge: 
+    version: 2.0.4
+- jeweler: 
+    version: 1.4.0
+- rr: 
+    version: 0.10.11
+- term-ansicolor: 
+    version: 1.0.5
+- riot: 
+    version: 0.11.2
+- riot_notifier: 
+    version: 0.1.1
+- yard: 
+    version: 0.5.8
+hash: a973e01f60adf838220ee9b4d6a820207e43c6bc
+sources: 
+- Rubygems: 
+    uri: http://rubygems.org
