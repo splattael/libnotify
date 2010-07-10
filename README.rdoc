@@ -35,7 +35,16 @@ You'll need libnotify. On Debian just type:
 
   apt-get install libnotify1
 
+== Testing
+
+  git co git://github.com/splattael/libnotify.git
+  cd libnotify
+  gem install bundler
+  bundle install
+  rake
+
 == Authors
+
 * Peter Suschlik
 
 == TODO
