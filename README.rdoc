@@ -3,8 +3,7 @@
 Ruby bindings for libnotify using FFI.
 
 Source[http://github.com/splattael/libnotify] |
-RDoc[http://rdoc.info/projects/splattael/libnotify] |
-Metrics[http://getcaliper.com/caliper/project?repo=http%3A%2F%2Fgemcutter.org%2Fgems%2Flibnotify]
+RDoc[http://rdoc.info/projects/splattael/libnotify]
 
 == Usage
 
@@ -41,6 +40,4 @@ You'll need libnotify. On Debian just type:
 
 == TODO
 
-* Empty strings give warnings (lib/libnotify.rb:46)
-* Simplify timeout= (lib/libnotify.rb:64)
-* Mock FFI calls with rrriot. (test/test_libnotify.rb:60)
+* Mock FFI calls with rrriot. (test/test_libnotify.rb:58)
