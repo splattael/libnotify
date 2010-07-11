@@ -1,1 +1,1 @@
-rvm ree@libnotify
+rvm gemset create libnotify
