@@ -117,6 +117,7 @@ module Libnotify
     def timeout=(timeout)
       @timeout = case timeout
       when Float
+        timeout /= 10 if RUBY_VERSION == "1.8.6" # Strange workaround?
         (timeout * 1000).to_i
       when Fixnum
         if timeout >= 100 # assume miliseconds

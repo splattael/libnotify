@@ -15,7 +15,7 @@ dependencies:
   riot_notifier: 
     group: 
     - :test
-    version: ">= 0"
+    version: ">= 0.2.0"
   riot: 
     group: 
     - :test
@@ -42,10 +42,10 @@ specs:
 - riot: 
     version: 0.11.2
 - riot_notifier: 
-    version: 0.1.1
+    version: 0.2.0
 - yard: 
     version: 0.5.8
-hash: a973e01f60adf838220ee9b4d6a820207e43c6bc
+hash: 6cb15cfba060c9636f2e2b9a7904cd1827b88ade
 sources: 
 - Rubygems: 
     uri: http://rubygems.org
