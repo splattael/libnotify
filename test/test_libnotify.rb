@@ -27,6 +27,7 @@ context Libnotify::API do
     asserts("urgency is :normal") { topic.urgency }.equals(:normal)
     asserts("timeout is nil") { topic.timeout }.nil
     asserts("icon_path is nil") { topic.icon_path }.nil
+    asserts("append is true") { topic.append }.equals(true)
   end
 
   context "with options and block" do
@@ -34,12 +35,14 @@ context Libnotify::API do
       topic.new(:summary => "hello", :body => "body", :invalid_option => 23) do |n|
         n.body = "overwritten"
         n.icon_path = "/path/to/icon"
+        n.append = false
       end
     end
 
     asserts("summary is set") { topic.summary }.equals("hello")
     asserts("body was overwritten by block") { topic.body }.equals("overwritten")
     asserts("icon_path set") { topic.icon_path }.equals("/path/to/icon")
+    asserts("append is set") { topic.append }.equals(false)
   end
 
   context "timeout=" do

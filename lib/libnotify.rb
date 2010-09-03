@@ -20,7 +20,7 @@ module Libnotify
   #     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
   #   end
   #   n.show!
-  # 
+  #
   # @example Mixed syntax
   #   Libnotify.new(options) do |n|
   #     n.timeout = 1.5     # overrides :timeout in options
@@ -77,6 +77,7 @@ module Libnotify
     attach_function :notify_notification_new, [:string, :string, :string, :pointer], :pointer
     attach_function :notify_notification_set_urgency, [:pointer, :urgency], :void
     attach_function :notify_notification_set_timeout, [:pointer, :long], :void
+    attach_function :notify_notification_set_hint_string, [:pointer, :string, :string], :void
     attach_function :notify_notification_show, [:pointer, :pointer], :bool
   end
 
@@ -84,7 +85,7 @@ module Libnotify
     include FFI
 
     attr_reader :timeout
-    attr_accessor :summary, :body, :icon_path, :urgency
+    attr_accessor :summary, :body, :icon_path, :urgency, :append
 
     # Creates a notification object.
     #
@@ -99,6 +100,7 @@ module Libnotify
       self.summary = self.body = ' '
       self.urgency = :normal
       self.timeout = nil
+      self.append = true
     end
     private :set_defaults
 
@@ -110,6 +112,10 @@ module Libnotify
       notify = notify_notification_new(summary, body, icon_path, nil)
       notify_notification_set_urgency(notify, urgency)
       notify_notification_set_timeout(notify, timeout || -1)
+      if append
+        notify_notification_set_hint_string(notify, "x-canonical-append", "")
+        notify_notification_set_hint_string(notify, "append", "")
+      end
       notify_notification_show(notify, nil)
     end
 
