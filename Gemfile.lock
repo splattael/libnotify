@@ -1,51 +1,33 @@
---- 
-dependencies: 
-  yard: 
-    group: 
-    - :test
-    version: ">= 0"
-  jeweler: 
-    group: 
-    - :test
-    version: ">= 0"
-  ffi: 
-    group: 
-    - :default
-    version: ">= 0.6.2"
-  riot_notifier: 
-    group: 
-    - :test
-    version: ">= 0.2.0"
-  riot: 
-    group: 
-    - :test
-    version: = 0.11.2
-specs: 
-- rake: 
-    version: 0.8.7
-- ffi: 
-    version: 0.6.3
-- json_pure: 
-    version: 1.4.3
-- gemcutter: 
-    version: 0.5.0
-- git: 
-    version: 1.2.5
-- rubyforge: 
-    version: 2.0.4
-- jeweler: 
-    version: 1.4.0
-- rr: 
-    version: 0.10.11
-- term-ansicolor: 
-    version: 1.0.5
-- riot: 
-    version: 0.11.2
-- riot_notifier: 
-    version: 0.2.0
-- yard: 
-    version: 0.5.8
-hash: 6cb15cfba060c9636f2e2b9a7904cd1827b88ade
-sources: 
-- Rubygems: 
-    uri: http://rubygems.org
+GEM
+  remote: http://rubygems.org/
+  specs:
+    ffi (0.6.3)
+      rake (>= 0.8.7)
+    gemcutter (0.6.1)
+    git (1.2.5)
+    jeweler (1.4.0)
+      gemcutter (>= 0.1.0)
+      git (>= 1.2.5)
+      rubyforge (>= 2.0.0)
+    json_pure (1.4.6)
+    rake (0.8.7)
+    riot (0.11.2)
+      rr
+      term-ansicolor
+    riot_notifier (0.3.0)
+      riot (~> 0.11.0)
+    rr (1.0.0)
+    rubyforge (2.0.4)
+      json_pure (>= 1.1.7)
+    term-ansicolor (1.0.5)
+    yard (0.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ffi (>= 0.6.2)
+  jeweler
+  riot (= 0.11.2)
+  riot_notifier (>= 0.2.0)
+  yard
