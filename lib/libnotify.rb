@@ -78,6 +78,7 @@ module Libnotify
     attach_function :notify_notification_set_urgency, [:pointer, :urgency], :void
     attach_function :notify_notification_set_timeout, [:pointer, :long], :void
     attach_function :notify_notification_set_hint_string, [:pointer, :string, :string], :void
+    attach_function :notify_notification_clear_hints, [:pointer], :void
     attach_function :notify_notification_show, [:pointer, :pointer], :bool
   end
 
@@ -117,6 +118,8 @@ module Libnotify
         notify_notification_set_hint_string(notify, "append", "")
       end
       notify_notification_show(notify, nil)
+    ensure
+      notify_notification_clear_hints(notify) if append
     end
 
     # @todo Simplify timeout=
