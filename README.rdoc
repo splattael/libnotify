@@ -46,7 +46,8 @@ You'll need libnotify. On Debian just type:
 
 == Authors
 
-* Peter Suschlik
+* Peter Suschlik (http://github.com/splattael)
+* Dennis Collective (http://github.com/denniscollective)
 
 == TODO
 
