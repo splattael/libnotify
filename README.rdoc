@@ -51,4 +51,4 @@ You'll need libnotify. On Debian just type:
 
 == TODO
 
-* Mock FFI calls with rrriot. (test/test_libnotify.rb:58)
+* Mock FFI calls with rrriot. (test/test_libnotify.rb:61)
