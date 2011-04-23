@@ -61,7 +61,7 @@ context Libnotify::API do
   # TODO Mock FFI calls with rrriot.
   context "show!" do
     setup do
-      topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/scalable/emblems/emblem-favorite.svg")
+      topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
     end
 
     context "for real" do
