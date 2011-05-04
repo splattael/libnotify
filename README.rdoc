@@ -30,6 +30,11 @@ http://github.com/splattael/libnotify/raw/master/libnotify.png
     n.timeout = 1.5     # overrides :timeout in options
   end
 
+  # Icon path auto-detection
+  Libnotify.icon_dirs << "/usr/share/icons/gnome/*/"
+  Libnotify.show(:icon_path => "emblem-default.png")
+  Libnotify.show(:icon_path => :"emblem-default")
+
 == Installation
 
   gem install libnotify

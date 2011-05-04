@@ -77,8 +77,19 @@ module Libnotify
   class API
     include FFI
 
-    attr_reader :timeout
-    attr_accessor :summary, :body, :icon_path, :urgency, :append
+    attr_reader :timeout, :icon_path
+    attr_accessor :summary, :body, :urgency, :append
+
+    class << self
+      # List of globs to icons
+      attr_accessor :icon_dirs
+    end
+
+    self.icon_dirs = [
+      "/usr/share/icons/gnome/48x48/emblems",
+      "/usr/share/icons/gnome/256x256/emblems",
+      "/usr/share/icons/gnome/*/emblems"
+    ]
 
     # Creates a notification object.
     #
@@ -130,6 +141,32 @@ module Libnotify
         nil
       else
         timeout.to_s.to_i
+      end
+    end
+
+    # Sets icon path.
+    #
+    # Path can be absolute, relative (will be resolved) or an symbol.
+    #
+    # @todo document and refactor
+    def icon_path=(path)
+      case path
+      when /^\// # absolute
+        @icon_path = path
+      when String
+        # TODO refactor!
+        self.class.icon_dirs.map { |d| Dir[d] }.flatten.uniq.each do |dir|
+          full_path = File.join(dir, path)
+          if File.exist?(full_path)
+            @icon_path = full_path
+            return
+          end
+        end
+        @icon_path = path
+      when Symbol
+        self.icon_path = "#{path}.png"
+      else
+        @icon_path = nil
       end
     end
 

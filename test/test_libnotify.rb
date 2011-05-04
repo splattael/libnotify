@@ -58,10 +58,19 @@ context Libnotify::API do
     asserts("with to_s.to_i") { topic.timeout = :"2 seconds"; topic.timeout }.equals(2)
   end
 
+  context "icon_path=" do
+    setup { topic.new }
+
+    asserts("with absolute path") { topic.icon_path = "/some/path/image.jpg"; topic.icon_path }.equals("/some/path/image.jpg")
+    asserts("with invalid relative path") { topic.icon_path = "some-invalid-path.jpg"; topic.icon_path }.equals("some-invalid-path.jpg")
+    asserts("with relative path") { topic.icon_path = "emblem-favorite.png"; topic.icon_path }.equals("/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
+    asserts("with symbol") { topic.icon_path = :"emblem-favorite"; topic.icon_path }.equals("/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
+  end
+
   # TODO Mock FFI calls with rrriot.
   context "show!" do
     setup do
-      topic.new(:timeout => 1.0, :icon_path => "/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
+      topic.new(:timeout => 1.0, :icon_path => :"emblem-favorite")
     end
 
     context "for real" do
