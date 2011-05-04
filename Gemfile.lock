@@ -23,6 +23,7 @@ GEM
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
     term-ansicolor (1.0.5)
+    watchr (0.7)
     yard (0.6.0)
 
 PLATFORMS
@@ -33,4 +34,5 @@ DEPENDENCIES
   jeweler
   riot (= 0.11.2)
   riot_notifier (~> 0.4.0)
+  watchr
   yard

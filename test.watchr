@@ -1,11 +1,46 @@
 #!/usr/bin/env watchr
 
-begin
-  require File.join(ENV["HOME"], ".watchr.test.rb")
-rescue LoadError
-  warn "Unable to load #{File.join(ENV["HOME"], ".watchr.test.rb")}"
-  warn "You might try this: http://gist.github.com/raw/273574/8804dff44b104e9b8706826dc8882ed985b4fd13/.watchr.test.rb"
-  exit
+#!/usr/bin/env watchr
+
+def run(cmd)
+  puts(cmd)
+  system cmd
+end
+
+def run_test_file(file)
+  clear
+  run "ruby -rubygems -Ilib:test #{file}"
+end
+
+def run_tests
+  clear
+  run "rake"
+end
+
+def clear
+  system "clear"
+end
+
+def underscore(file)
+  file.gsub('/', '_')
+end
+
+@interrupted = false
+
+Signal.trap 'QUIT' do
+  run_tests
+end
+
+Signal.trap 'INT' do
+  if @interrupted then
+    abort("\n")
+  else
+    puts "Interrupt a second time to quit"
+    @interrupted = true
+    Kernel.sleep 1.5
+    # raise Interrupt, nil # let the run loop catch it
+    run_tests
+  end
 end
 
 run_tests
