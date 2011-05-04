@@ -3,7 +3,7 @@
 Ruby bindings for libnotify using FFI.
 
 Source[http://github.com/splattael/libnotify] |
-RDoc[http://rdoc.info/projects/splattael/libnotify]
+RDoc[http://rdoc.info/github/splattael/libnotify/master/file/README.rdoc]
 
 http://github.com/splattael/libnotify/raw/master/libnotify.png
 
