@@ -13,13 +13,17 @@ module Libnotify
   #
   # @example Block syntax
   #   n = Libnotify.new do |notify|
-  #     notify.summary = "world"
-  #     notify.body = "hello"
-  #     notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
-  #     notify.urgency = :critical  # :low, :normal, :critical
-  #     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
+  #     notify.summary    = "hello"
+  #     notify.body       = "world"
+  #     notify.timeout    = 1.5         # 1.5 (s), 1000 (ms), "2", nil, false
+  #     notify.urgency    = :critical   # :low, :normal, :critical
+  #     notify.append     = false       # default true - append onto existing notification
+  #     notify.icon_path  = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
   #   end
   #   n.show!
+  #
+  # @example Hash syntax
+  #   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
   #
   # @example Mixed syntax
   #   Libnotify.new(options) do |n|
@@ -45,18 +49,6 @@ module Libnotify
   end
 
   # Shows a notification. It takes the same +options+ as Libnotify.new.
-  #
-  # @example Block syntax
-  #   Libnotify.show do |notify|
-  #     notify.summary = "world"
-  #     notify.body = "hello"
-  #     notify.timeout = 1.5        # 1.5 (s), 1000 (ms), "2", nil, false
-  #     notify.urgency = :critical  # :low, :normal, :critical
-  #     notify.icon_path = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
-  #   end
-  #
-  # @example Hash syntax
-  #   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
   #
   # @see Libnotify.new
   def self.show(options={}, &block)
