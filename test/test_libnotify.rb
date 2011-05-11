@@ -1,87 +1,102 @@
 require 'helper'
 
-context Libnotify do
-  setup { Libnotify }
-
-  asserts_topic("responds to new").respond_to(:new)
-  asserts_topic("responds to show").respond_to(:show)
-
-  asserts("#new calls API#new") do
-    mock(Libnotify::API).new(hash_including(:body => "test")) { true }
-    Libnotify.new(:body => "test")
+class TestLibnotify < MiniTest::Unit::TestCase
+  def test_respond_to
+    assert_respond_to Libnotify, :new
+    assert_respond_to Libnotify, :show
   end
-  asserts("#show calls API#show") do
-    mock(Libnotify::API).show(hash_including(:body => "test")) { true }
-    Libnotify.show(:body => "test")
+
+  def test_delegation
+    skip "test delegation using mock"
+
+    # old code
+    asserts("#new calls API#new") do
+      mock(Libnotify::API).new(hash_including(:body => "test")) { true }
+      Libnotify.new(:body => "test")
+    end
+    asserts("#show calls API#show") do
+      mock(Libnotify::API).show(hash_including(:body => "test")) { true }
+      Libnotify.show(:body => "test")
+    end
   end
 end
 
-context Libnotify::API do
-  setup { Libnotify::API }
-
-  context "without options and block" do
-    setup { topic.new }
-
-    asserts("summary is whitspaced") { topic.summary }.equals(" ")
-    asserts("body is whitspaced") { topic.body }.equals(" ")
-    asserts("urgency is :normal") { topic.urgency }.equals(:normal)
-    asserts("timeout is nil") { topic.timeout }.nil
-    asserts("icon_path is nil") { topic.icon_path }.nil
-    asserts("append is true") { topic.append }.equals(true)
+class TestLibnotifyAPI < MiniTest::Unit::TestCase
+  def test_without_options_and_block
+    assert_equal " ",     libnotify.summary
+    assert_equal " ",     libnotify.body
+    assert_equal :normal, libnotify.urgency
+    assert_nil            libnotify.timeout
+    assert_nil            libnotify.icon_path
+    assert                libnotify.append
   end
 
-  context "with options and block" do
-    setup do
-      topic.new(:summary => "hello", :body => "body", :invalid_option => 23) do |n|
-        n.body = "overwritten"
-        n.icon_path = "/path/to/icon"
-        n.append = false
-      end
+  def test_with_options_and_block
+    libnotify(:summary => "hello", :body => "body", :invalid_option => 23) do |n|
+      n.body      = "overwritten"
+      n.icon_path = "/path/to/icon"
+      n.append    = false
     end
 
-    asserts("summary is set") { topic.summary }.equals("hello")
-    asserts("body was overwritten by block") { topic.body }.equals("overwritten")
-    asserts("icon_path set") { topic.icon_path }.equals("/path/to/icon")
-    asserts("append is set") { topic.append }.equals(false)
+    assert_equal "hello",         libnotify.summary
+    assert_equal "overwritten",   libnotify.body
+    assert_equal "/path/to/icon", libnotify.icon_path
+    assert                       !libnotify.append
   end
 
-  context "timeout=" do
-    setup { topic.new }
-
-    asserts("with float") { topic.timeout = 2.5; topic.timeout }.equals(2500)
-    asserts("with fixnum ms") { topic.timeout = 100; topic.timeout }.equals(100)
-    asserts("with fixnum ms") { topic.timeout = 101; topic.timeout }.equals(101)
-    asserts("with fixnum seconds") { topic.timeout = 1; topic.timeout }.equals(1000)
-    asserts("with fixnum seconds") { topic.timeout = 99; topic.timeout }.equals(99000)
-    asserts("with nil") { topic.timeout = nil; topic.timeout }.nil
-    asserts("with false") { topic.timeout = false; topic.timeout }.nil
-    asserts("with to_s.to_i") { topic.timeout = :"2 seconds"; topic.timeout }.equals(2)
+  def test_timeout_setter
+    assert_timeout 2500,  2.5,    "with float"
+    assert_timeout 100,   100,    "with fixnum ms"
+    assert_timeout 101,   101,    "with fixnum ms"
+    assert_timeout 1000,  1,      "with fixnum seconds"
+    assert_timeout 99000, 99,     "with fixnum seconds"
+    assert_timeout nil,   nil,    "with nil"
+    assert_timeout nil,   false,  "with false"
+    assert_timeout 2,     :"2 s", "with to_s.to_i"
   end
 
-  context "icon_path=" do
-    setup { topic.new }
-
-    asserts("with absolute path") { topic.icon_path = "/some/path/image.jpg"; topic.icon_path }.equals("/some/path/image.jpg")
-    asserts("with invalid relative path") { topic.icon_path = "some-invalid-path.jpg"; topic.icon_path }.equals("some-invalid-path.jpg")
-    asserts("with relative path") { topic.icon_path = "emblem-favorite.png"; topic.icon_path }.matches(%r{/usr/share/icons/gnome/.*/emblems/emblem-favorite.png})
-    asserts("with symbol") { topic.icon_path = :"emblem-favorite"; topic.icon_path }.matches(%r{/usr/share/icons/gnome/.*/emblems/emblem-favorite.png})
+  def test_icon_path_setter
+    assert_icon_path "/some/path/image.jpg",        "/some/path/image.jpg",   "with absolute path"
+    assert_icon_path "some-invalid-path.jpg",       "some-invalid-path.jpg",  "with non-existant relative path"
+    assert_icon_path %r{^/.*/emblem-favorite.png},  "emblem-favorite.png",    "with relative path"
+    assert_icon_path %r{^/.*/emblem-favorite.png},  :"emblem-favorite",       "with symbol"
   end
 
-  # TODO Mock FFI calls with rrriot.
-  context "show!" do
-    setup do
-      topic.new(:timeout => 1.0, :icon_path => :"emblem-favorite")
-    end
+  def test_integration
+    skip "enable integration"
 
-    context "for real" do
-      [ :low, :normal, :critical ].each do |urgency|
-        asserts("with urgency #{urgency}") do
-          topic.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM}"
-          topic.body = defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?'
-          topic.urgency = urgency
-          topic.show!
-        end
-      end
+    [ :low, :normal, :critical ].each do |urgency|
+      libnotify = Libnotify::API.new(:timeout => 0.5, :icon_path => :"emblem-favorite", :append => true)
+      libnotify.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM} #{urgency}"
+      libnotify.body    = defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?'
+      libnotify.urgency = urgency
+      libnotify.show!
     end
   end
+
+  private
+
+  def libnotify(options={}, &block)
+    @libnotify ||= Libnotify::API.new(options, &block)
+  end
+
+  def assert_timeout(expected, value, message)
+    assert_value_set :timeout, expected, value, message
+  end
+
+  def assert_icon_path(expected, value, message)
+    assert_value_set :icon_path, expected, value, message
+  end
+
+  def assert_value_set(attribute, expected, value, message)
+    libnotify.send("#{attribute}=", value)
+    got = libnotify.send(attribute)
+    case expected
+    when Regexp
+      assert_match expected, got, message
+    else
+      assert_equal expected, got, message
+    end
+  end
+
 end

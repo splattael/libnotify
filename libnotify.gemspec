@@ -18,8 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency      'ffi',          '~> 1.0'
 
-  s.add_development_dependency  'watchr'
-  s.add_development_dependency  'riot',         '= 0.12.3'
-  s.add_development_dependency  'riot_notifier'
+  s.add_development_dependency  'minitest'
   s.add_development_dependency  'yard'
 end

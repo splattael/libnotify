@@ -1,8 +1,5 @@
 require 'rubygems'
-require 'riot'
-require 'riot/rr'
-require 'riot_notifier'
+require 'bundler/setup'
+require 'minitest/autorun'
 
 require 'libnotify'
-
-Riot.reporter = RiotNotifier
