@@ -1,6 +1,4 @@
-#!/usr/bin/env watchr
-
-#!/usr/bin/env watchr
+#!/usr/bin/env bundle exec watchr
 
 def run(cmd)
   puts(cmd)

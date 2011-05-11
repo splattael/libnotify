@@ -1,38 +1,29 @@
+PATH
+  remote: .
+  specs:
+    libnotify (0.5.0)
+      ffi (~> 1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
-    ffi (0.6.3)
+    ffi (1.0.7)
       rake (>= 0.8.7)
-    gemcutter (0.6.1)
-    git (1.2.5)
-    jeweler (1.4.0)
-      gemcutter (>= 0.1.0)
-      git (>= 1.2.5)
-      rubyforge (>= 2.0.0)
-    json_pure (1.4.6)
-    libnotify (0.2.0)
-      ffi (>= 0.6.2)
     rake (0.8.7)
-    riot (0.11.2)
+    riot (0.12.3)
       rr
-      term-ansicolor
-    riot_notifier (0.4.0)
-      libnotify (~> 0.2.0)
-      riot (~> 0.11.0)
+    riot_notifier (0.2.0)
+      riot (>= 0.10.12)
     rr (1.0.2)
-    rubyforge (2.0.4)
-      json_pure (>= 1.1.7)
-    term-ansicolor (1.0.5)
     watchr (0.7)
-    yard (0.6.0)
+    yard (0.6.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  ffi (>= 0.6.2)
-  jeweler
-  riot (= 0.11.2)
-  riot_notifier (~> 0.4.0)
+  libnotify!
+  riot (= 0.12.3)
+  riot_notifier
   watchr
   yard

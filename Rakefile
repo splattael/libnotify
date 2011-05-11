@@ -1,37 +1,14 @@
+require 'bundler'
+Bundler::GemHelper.install_tasks
+
 require 'rake'
 require 'rake/rdoctask'
 require 'rubygems'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "libnotify"
-    gem.summary = 'Ruby bindings for libnotify using FFI'
-    gem.email = "peter-libnotify@suschlik.de"
-    gem.homepage = "http://github.com/splattael/libnotify"
-    gem.authors = ["Peter Suschlik"]
-
-    gem.has_rdoc = true
-    gem.extra_rdoc_files = [ "README.rdoc" ]
-
-    gem.add_dependency "ffi", ">= 0.6.2"
-
-    gem.add_development_dependency "riot", "= 0.11.2"
-    gem.add_development_dependency "riot_notifier"
-    gem.add_development_dependency "yard"
-
-    gem.test_files = Dir.glob('test/test_*.rb')
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
-end
 
 # Test
 require 'rake/testtask'
 desc 'Default: run unit tests.'
 task :default => :test
-task :test => :check_dependencies
 
 Rake::TestTask.new(:test) do |test|
   test.test_files = FileList.new('test/test_*.rb')

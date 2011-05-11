@@ -63,8 +63,8 @@ context Libnotify::API do
 
     asserts("with absolute path") { topic.icon_path = "/some/path/image.jpg"; topic.icon_path }.equals("/some/path/image.jpg")
     asserts("with invalid relative path") { topic.icon_path = "some-invalid-path.jpg"; topic.icon_path }.equals("some-invalid-path.jpg")
-    asserts("with relative path") { topic.icon_path = "emblem-favorite.png"; topic.icon_path }.equals("/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
-    asserts("with symbol") { topic.icon_path = :"emblem-favorite"; topic.icon_path }.equals("/usr/share/icons/gnome/48x48/emblems/emblem-favorite.png")
+    asserts("with relative path") { topic.icon_path = "emblem-favorite.png"; topic.icon_path }.matches(%r{/usr/share/icons/gnome/.*/emblems/emblem-favorite.png})
+    asserts("with symbol") { topic.icon_path = :"emblem-favorite"; topic.icon_path }.matches(%r{/usr/share/icons/gnome/.*/emblems/emblem-favorite.png})
   end
 
   # TODO Mock FFI calls with rrriot.
