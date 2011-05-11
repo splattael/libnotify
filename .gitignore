@@ -4,3 +4,4 @@ coverage
 tags
 .yardoc
 .bundle
+Gemfile.lock
