@@ -65,6 +65,7 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
   def test_integration
     skip "enable integration"
 
+
     [ :low, :normal, :critical ].each do |urgency|
       libnotify = Libnotify::API.new(:timeout => 0.5, :icon_path => :"emblem-favorite", :append => true)
       libnotify.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM} #{urgency}"
