@@ -16,7 +16,9 @@ module Libnotify
     self.icon_dirs = [
       "/usr/share/icons/gnome/48x48/emblems",
       "/usr/share/icons/gnome/256x256/emblems",
-      "/usr/share/icons/gnome/*/emblems"
+      "/usr/share/icons/gnome/*/emblems",
+      "/usr/share/icons/gnome/scalable/emotes",
+      "/usr/share/icons/gnome/*/emotes"
     ]
 
     # Creates a notification object.
@@ -82,15 +84,9 @@ module Libnotify
       when /^\// # absolute
         @icon_path = path
       when String
-        # TODO refactor!
-        self.class.icon_dirs.map { |d| Dir[d] }.flatten.uniq.each do |dir|
-          full_path = File.join(dir, path)
-          if File.exist?(full_path)
-            @icon_path = full_path
-            return
-          end
-        end
-        @icon_path = path
+        @icon_path = self.class.icon_dirs.map { |d| Dir[File.join(d, path)] }.flatten.detect do |full_path|
+          File.exist?(full_path)
+        end || path
       when Symbol
         self.icon_path = "#{path}.png"
       else
