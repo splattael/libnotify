@@ -61,20 +61,21 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
   end
 
   def test_icon_path_setter
-    assert_icon_path "/some/path/image.jpg",        "/some/path/image.jpg",   "with absolute path"
-    assert_icon_path "some-invalid-path.jpg",       "some-invalid-path.jpg",  "with non-existant relative path"
-    assert_icon_path %r{^/.*/emblem-favorite.png},  "emblem-favorite.png",    "with relative path"
-    assert_icon_path %r{^/.*/emblem-favorite.png},  :"emblem-favorite",       "with symbol"
+    Libnotify::API.icon_dirs << File.expand_path("../..", __FILE__)
+    assert_icon_path "/some/path/image.jpg",  "/some/path/image.jpg",   "with absolute path"
+    assert_icon_path "some-invalid-path.jpg", "some-invalid-path.jpg",  "with non-existant relative path"
+    assert_icon_path %r{^/.*/libnotify.png},  "libnotify.png",          "with relative path"
+    assert_icon_path %r{^/.*/libnotify.png},  :"libnotify",             "with symbol"
   end
 
   def test_integration
     skip "enable integration"
 
+    libnotify = Libnotify::API.new(:timeout => 0.5, :icon_path => :"emblem-favorite", :append => true)
 
     [ :low, :normal, :critical ].each do |urgency|
-      libnotify = Libnotify::API.new(:timeout => 0.5, :icon_path => :"emblem-favorite", :append => true)
-      libnotify.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM} #{urgency}"
-      libnotify.body    = defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?'
+      libnotify.summary = "#{RUBY_VERSION} at #{RUBY_PLATFORM}"
+      libnotify.body    = [ urgency, defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : '?' ].join(" ")
       libnotify.urgency = urgency
       libnotify.show!
     end
