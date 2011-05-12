@@ -19,6 +19,11 @@ class TestLibnotify < MiniTest::Unit::TestCase
       Libnotify.show(:body => "test")
     end
   end
+
+  def test_version
+    assert defined?(Libnotify::VERSION), "version is defined"
+    assert Libnotify::VERSION
+  end
 end
 
 class TestLibnotifyAPI < MiniTest::Unit::TestCase
