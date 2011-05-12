@@ -14,12 +14,26 @@ module Libnotify
     end
 
     self.icon_dirs = [
-      "/usr/share/icons/gnome/48x48/emblems",
-      "/usr/share/icons/gnome/256x256/emblems",
       "/usr/share/icons/gnome/*/emblems",
-      "/usr/share/icons/gnome/scalable/emotes",
       "/usr/share/icons/gnome/*/emotes"
     ]
+
+    # TODO refactor & test!
+    ICON_REGEX = /(\d+)x\d/
+    ICON_SORTER = proc do |a, b|
+      ma = a.scan ICON_REGEX
+      mb = b.scan ICON_REGEX
+
+      if ma.first && mb.first
+        mb.first.first.to_i <=> ma.first.first.to_i
+      elsif ma.first && !mb.first
+        1
+      elsif !ma.first && ma.first
+        -1
+      else
+        a <=> b
+      end
+    end
 
     # Creates a notification object.
     #
@@ -84,9 +98,8 @@ module Libnotify
       when /^\// # absolute
         @icon_path = path
       when String
-        @icon_path = self.class.icon_dirs.map { |d| Dir[File.join(d, path)] }.flatten.detect do |full_path|
-          File.exist?(full_path)
-        end || path
+        list = self.class.icon_dirs.map { |d| Dir[File.join(d, path)] }.flatten.sort(&ICON_SORTER)
+        @icon_path = list.detect { |full_path| File.exist?(full_path) } || path
       when Symbol
         self.icon_path = "#{path}.png"
       else
