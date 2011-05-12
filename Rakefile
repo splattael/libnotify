@@ -16,6 +16,19 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+desc "Test with several ruby versions"
+task :"test:rubies" do
+  command = "bundle check || bundle install && rake"
+  %w[ree 1.9.2 jruby].each do |ruby|
+    rvm = "#{ruby}@libnotify"
+    puts "\n" * 3
+    puts "RVM: #{rvm}"
+    puts "=" * 40
+
+    system %{rvm #{rvm} exec bash -c '#{command}'}
+  end
+end
+
 # Yard
 begin
   require 'yard'
