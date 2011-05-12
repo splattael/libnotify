@@ -59,19 +59,33 @@ module Libnotify
   module FFI
     extend ::FFI::Library
 
-    ffi_lib %w(libnotify libnotify.so libnotify.so.1)
+    def self.included(base)
+      ffi_lib %w[libnotify libnotify.so libnotify.so.1]
+      attach_functions!
+    rescue LoadError => e
+      warn e.message
+    end
 
     enum :urgency, [ :low, :normal, :critical ]
 
-    attach_function :notify_init, [:string], :bool
-    attach_function :notify_uninit, [], :void
+    def self.attach_functions!
+      attach_function :notify_init,                         [:string],                              :bool
+      attach_function :notify_uninit,                       [],                                     :void
+      attach_function :notify_notification_new,             [:string, :string, :string, :pointer],  :pointer
+      attach_function :notify_notification_set_urgency,     [:pointer, :urgency],                   :void
+      attach_function :notify_notification_set_timeout,     [:pointer, :long],                      :void
+      attach_function :notify_notification_set_hint_string, [:pointer, :string, :string],           :void
+      attach_function :notify_notification_clear_hints,     [:pointer],                             :void
+      attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
+    end
 
-    attach_function :notify_notification_new, [:string, :string, :string, :pointer], :pointer
-    attach_function :notify_notification_set_urgency, [:pointer, :urgency], :void
-    attach_function :notify_notification_set_timeout, [:pointer, :long], :void
-    attach_function :notify_notification_set_hint_string, [:pointer, :string, :string], :void
-    attach_function :notify_notification_clear_hints, [:pointer], :void
-    attach_function :notify_notification_show, [:pointer, :pointer], :bool
+    def method_missing(method, *args, &block)
+      if method.to_s =~ /^notify_/
+        warn "libnotify.so not found!"
+      end
+
+      super
+    end
   end
 
   class API
