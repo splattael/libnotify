@@ -7,6 +7,17 @@ require 'rake'
 require 'rake/rdoctask'
 require 'rubygems'
 
+def with_rubies(command)
+  SUPPORTED_RUBIES.each do |ruby|
+    rvm = "#{ruby}@libnotify"
+    puts "\n" * 3
+    puts "RVM: #{rvm}"
+    puts "=" * 40
+
+    system %{rvm #{rvm} exec bash -c '#{command}'}
+  end
+end
+
 # Test
 require 'rake/testtask'
 desc 'Default: run unit tests.'
@@ -21,14 +32,7 @@ end
 desc "Test with several ruby versions"
 task :"test:rubies" do
   command = "bundle check || bundle install && rake"
-  SUPPORTED_RUBIES.each do |ruby|
-    rvm = "#{ruby}@libnotify"
-    puts "\n" * 3
-    puts "RVM: #{rvm}"
-    puts "=" * 40
-
-    system %{rvm #{rvm} exec bash -c '#{command}'}
-  end
+  with_rubies(command)
 end
 
 # Yard

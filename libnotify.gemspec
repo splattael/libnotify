@@ -2,10 +2,20 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "libnotify"
 
+platform = Gem::Platform::CURRENT
+needs_ffi = true
+
+if RUBY_PLATFORM =~ /java/
+  needs_ffi = false
+elsif defined?(RUBY_ENGINE) && RUBY_ENGINE =~ /rbx/
+  needs_ffi = false
+  platform = Gem::Platform::new ['universal', 'rubinius', '1.2']
+end
+
 Gem::Specification.new do |s|
   s.name        = "libnotify"
   s.version     = Libnotify::VERSION
-  s.platform    = Gem::Platform::RUBY
+  s.platform    = platform
   s.authors     = ["Peter Suschlik"]
   s.email       = ["peter-libnotify@suschlik.de"]
   s.homepage    = "http://rubygems.org/gems/libnotify"
@@ -16,7 +26,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  if RUBY_PLATFORM !~ /java/ && (defined?(RUBY_ENGINE) && RUBY_ENGINE !~ /rbx/)
+  if needs_ffi
     s.add_runtime_dependency      'ffi',          '~> 1.0'
   end
 
