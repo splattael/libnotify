@@ -9,13 +9,19 @@ require 'rubygems'
 
 def with_rubies(command)
   SUPPORTED_RUBIES.each do |ruby|
-    rvm = "#{ruby}@libnotify"
-    puts "\n" * 3
-    puts "RVM: #{rvm}"
-    puts "=" * 40
-
-    system %{rvm #{rvm} exec bash -c '#{command}'}
+    with_ruby(ruby, command)
   end
+end
+
+def with_ruby(ruby, command)
+  rvm     = "#{ruby}@libnotify"
+  command = %{rvm #{rvm} exec bash -c '#{command}'}
+
+  puts "\n" * 3
+  puts "CMD: #{command}"
+  puts "=" * 40
+
+  system command
 end
 
 # Test
@@ -32,6 +38,14 @@ end
 desc "Test with several ruby versions"
 task :"test:rubies" do
   command = "bundle check || bundle install && rake"
+  with_rubies(command)
+end
+
+# Release
+
+desc "Release gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
+task :"release:all" do
+  command = "rake release"
   with_rubies(command)
 end
 
