@@ -1,28 +1,10 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-SUPPORTED_RUBIES = %w[ree 1.9.2 jruby rbx]
-
 require 'rake'
 require 'rake/rdoctask'
 require 'rubygems'
-
-def with_rubies(command)
-  SUPPORTED_RUBIES.each do |ruby|
-    with_ruby(ruby, command)
-  end
-end
-
-def with_ruby(ruby, command)
-  rvm     = "#{ruby}@libnotify"
-  command = %{rvm #{rvm} exec bash -c '#{command}'}
-
-  puts "\n" * 3
-  puts "CMD: #{command}"
-  puts "=" * 40
-
-  system command
-end
+load 'libnotify/tasks/rubies.rake'
 
 # Test
 require 'rake/testtask'
@@ -34,21 +16,6 @@ Rake::TestTask.new(:test) do |test|
   test.libs << 'test'
   test.verbose = true
 end
-
-desc "Test with several ruby versions"
-task :"test:rubies" do
-  command = "bundle check || bundle install && rake"
-  with_rubies(command)
-end
-
-# Release
-
-desc "Release gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
-task :"release:all" do
-  command = "rake release"
-  with_rubies(command)
-end
-
 # Yard
 begin
   require 'yard'
