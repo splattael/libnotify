@@ -58,7 +58,7 @@ module Libnotify
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
       notify = notify_notification_new(summary, body, icon_path, nil)
-      notify_notification_set_urgency(notify, urgency)
+      notify_notification_set_urgency(notify, lookup_urgency(urgency))
       notify_notification_set_timeout(notify, timeout || -1)
       if append
         notify_notification_set_hint_string(notify, "x-canonical-append", "")

@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-RUBIES = %w[ree 1.9.2 jruby]
+SUPPORTED_RUBIES = %w[ree 1.9.2 jruby rbx]
 
 require 'rake'
 require 'rake/rdoctask'
@@ -21,7 +21,7 @@ end
 desc "Test with several ruby versions"
 task :"test:rubies" do
   command = "bundle check || bundle install && rake"
-  RUBIES.each do |ruby|
+  SUPPORTED_RUBIES.each do |ruby|
     rvm = "#{ruby}@libnotify"
     puts "\n" * 3
     puts "RVM: #{rvm}"

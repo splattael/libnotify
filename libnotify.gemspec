@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  unless RUBY_PLATFORM =~ /java/
+  if RUBY_PLATFORM !~ /java/ && (defined?(RUBY_ENGINE) && RUBY_ENGINE !~ /rbx/)
     s.add_runtime_dependency      'ffi',          '~> 1.0'
   end
 
   s.add_development_dependency  'minitest'
-  s.add_development_dependency  'yard'
+  s.add_development_dependency  'yard',           '~> 0.7.0'
 end
