@@ -33,7 +33,6 @@ namespace :rubies do
   end
 
   desc "Pushes gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
-  #task :push => :build do
   task :push => :build do
     Dir[File.join("pkg", "#{GEMSPEC.name}-#{GEMSPEC.version}*.gem")].each do |gem|
       command = "gem push #{gem}"
