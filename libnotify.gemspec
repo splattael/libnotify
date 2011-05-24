@@ -5,10 +5,7 @@ require "libnotify"
 platform = Gem::Platform::RUBY
 needs_ffi = true
 
-if RUBY_PLATFORM =~ /java/
-  needs_ffi = false
-  platform = "java"
-elsif defined?(RUBY_ENGINE) && RUBY_ENGINE =~ /rbx/
+if defined?(RUBY_ENGINE) && RUBY_ENGINE =~ /rbx/
   needs_ffi = false
   platform = Gem::Platform::new ['universal', 'rubinius', '1.2']
 end
@@ -28,7 +25,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   if needs_ffi
-    s.add_runtime_dependency      'ffi',          '~> 1.0'
+    s.add_runtime_dependency      'ffi',          '= 1.0.9'
   end
 
   s.add_development_dependency  'minitest'

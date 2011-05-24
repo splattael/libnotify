@@ -28,7 +28,7 @@ namespace :rubies do
 
   desc "Build gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
   task :build do
-    command = "rake build"
+    command = "rm Gemfile.lock && rake build"
     with_rubies(command)
   end
 
