@@ -2,11 +2,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "libnotify"
 
-platform = Gem::Platform::CURRENT
+platform = Gem::Platform::RUBY
 needs_ffi = true
 
 if RUBY_PLATFORM =~ /java/
   needs_ffi = false
+  platform = "java"
 elsif defined?(RUBY_ENGINE) && RUBY_ENGINE =~ /rbx/
   needs_ffi = false
   platform = Gem::Platform::new ['universal', 'rubinius', '1.2']
