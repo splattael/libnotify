@@ -1,12 +1,7 @@
+
 SUPPORTED_RUBIES = %w[ree 1.9.2 jruby rbx]
-
+PLATFORMS = %w[ree rbx]
 GEMSPEC = Bundler::GemHelper.new(Dir.pwd).gemspec
-
-def with_rubies(command)
-  SUPPORTED_RUBIES.each do |ruby|
-    with_ruby(ruby, command)
-  end
-end
 
 def with_ruby(ruby, command)
   rvm     = "#{ruby}@#{GEMSPEC.name}"
@@ -20,21 +15,23 @@ def with_ruby(ruby, command)
 end
 
 namespace :rubies do
-  desc "Run tests for following supported platforms #{SUPPORTED_RUBIES.inspect}"
+  desc "Run tests for following supported platforms #{SUPPORTED_RUBIES.join ", "}"
   task :test do
     command = "bundle check || bundle install && rake"
-    with_rubies(command)
+    SUPPORTED_RUBIES.each { |ruby| with_ruby(ruby, command) }
   end
 
-  desc "Build gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
+  desc "Build gems for following supported platforms #{PLATFORMS.join ", "}"
   task :build do
-    command = "rm Gemfile.lock && rake build"
-    with_rubies(command)
+    command = "rm -f Gemfile.lock && rake build"
+    PLATFORMS.each { |ruby| with_ruby(ruby, command) }
   end
 
-  desc "Pushes gems for following supported platforms #{SUPPORTED_RUBIES.inspect}"
+  versions = Dir[File.join("pkg", "#{GEMSPEC.name}-#{GEMSPEC.version}-*.gem")].to_a
+
+  desc "Pushes gems for following supported platforms #{versions.join ", "}"
   task :push => :build do
-    Dir[File.join("pkg", "#{GEMSPEC.name}-#{GEMSPEC.version}*.gem")].each do |gem|
+    versions.each do |gem|
       command = "gem push #{gem}"
       puts command
       system command
