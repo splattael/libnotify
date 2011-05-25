@@ -27,15 +27,13 @@ namespace :rubies do
     PLATFORMS.each { |ruby| with_ruby(ruby, command) }
   end
 
-  versions = Dir[File.join("pkg", "#{GEMSPEC.name}-#{GEMSPEC.version}-*.gem")].to_a
-
-  desc "Pushes gems for following supported platforms #{versions.join ", "}"
+  desc "Pushes gems for non-ruby platforms: rbx"
   task :push => :build do
+    versions = Dir[File.join("pkg", "#{GEMSPEC.name}-#{GEMSPEC.version}-*.gem")].to_a
     versions.each do |gem|
       command = "gem push #{gem}"
       puts command
       system command
     end
   end
-
 end
