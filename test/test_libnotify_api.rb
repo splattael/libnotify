@@ -55,10 +55,50 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
     end
   end
 
+  def test_mocked_ffi_provider
+    provider = mocked_ffi_provider
+    assert_equal 0, provider.called.size
+
+    provider.notify_init
+    assert_equal 1, provider.called.size
+    assert_equal :notify_init, provider.called.last[0]
+    assert_equal [], provider.called.last[1]
+
+    provider.notify_init "test"
+    assert_equal :notify_init, provider.called.last[0]
+    assert_equal ["test"], provider.called.last[1]
+  end
+
+  def test_mocked_notify
+    provider = mocked_ffi_provider
+    libnotify(:ffi => provider).show!
+
+    assert_equal 9, provider.called.size
+    # TODO assert_method_called
+  end
+
   private
 
   def libnotify(options={}, &block)
     @libnotify ||= Libnotify::API.new(options, &block)
+  end
+
+  def mocked_ffi_provider
+    Class.new do
+      attr_reader :called
+
+      def initialize
+         @called = []
+      end
+
+      def method_missing(name, *args, &block)
+        if name.to_s =~ /^notify_/
+          @called << [ name, args ]
+        else
+          super
+        end
+      end
+    end.new
   end
 
   def assert_timeout(expected, value, message)
@@ -78,6 +118,13 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
     else
       assert_equal expected, got, message
     end
+  end
+
+  def assert_method_called(expected_name, *expected_args)
+    found = libnotify.methods.select do |name, *args|
+      expected_name == name && expected_name == args
+    end
+    assert_equal 1, found.size, "found #{expected_name}(#{expected_args.inspect}) excatly 1 time"
   end
 
 end
