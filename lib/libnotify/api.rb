@@ -3,10 +3,8 @@ module Libnotify
   #
   # @see Libnotify
   class API
-    include FFI
-
     attr_reader :timeout, :icon_path
-    attr_accessor :summary, :body, :urgency, :append
+    attr_accessor :summary, :body, :urgency, :append, :ffi
 
     class << self
       # List of globs to icons
@@ -45,10 +43,11 @@ module Libnotify
     end
 
     def set_defaults
-      self.summary = self.body = ' '
-      self.urgency = :normal
-      self.timeout = nil
-      self.append = true
+      self.summary  = self.body = ' '
+      self.urgency  = :normal
+      self.timeout  = nil
+      self.append   = true
+      self.ffi      = FFI.provider
     end
     private :set_defaults
 
@@ -56,17 +55,17 @@ module Libnotify
     #
     # @see Libnotify.show
     def show!
-      notify_init(self.class.to_s) or raise "notify_init failed"
-      notify = notify_notification_new(summary, body, icon_path, nil)
-      notify_notification_set_urgency(notify, lookup_urgency(urgency))
-      notify_notification_set_timeout(notify, timeout || -1)
+      ffi.notify_init(self.class.to_s) or raise "notify_init failed"
+      notify = ffi.notify_notification_new(summary, body, icon_path, nil)
+      ffi.notify_notification_set_urgency(notify, ffi.notify_lookup_urgency(urgency))
+      ffi.notify_notification_set_timeout(notify, timeout || -1)
       if append
-        notify_notification_set_hint_string(notify, "x-canonical-append", "")
-        notify_notification_set_hint_string(notify, "append", "")
+        ffi.notify_notification_set_hint_string(notify, "x-canonical-append", "")
+        ffi.notify_notification_set_hint_string(notify, "append", "")
       end
-      notify_notification_show(notify, nil)
+      ffi.notify_notification_show(notify, nil)
     ensure
-      notify_notification_clear_hints(notify) if append
+      ffi.notify_notification_clear_hints(notify) if append
     end
 
     # @todo Simplify timeout=

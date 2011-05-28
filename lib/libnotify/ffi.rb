@@ -24,7 +24,7 @@ module Libnotify
       attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
     end
 
-    def lookup_urgency(urgency)
+    def notify_lookup_urgency(urgency)
       URGENCY.index(urgency)
     end
 
@@ -34,6 +34,12 @@ module Libnotify
       end
 
       super
+    end
+
+    def self.provider
+      Class.new do
+        include FFI
+      end.new
     end
   end
 end
