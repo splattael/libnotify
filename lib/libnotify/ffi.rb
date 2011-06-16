@@ -10,7 +10,7 @@ module Libnotify
       ffi_lib_flags :lazy, :local, :global if respond_to?(:ffi_lib_flags)
       ffi_lib %w[libgtk-x11-2.0.so.0 libgtk-x11-2.0.so libgtk-3.so.0 libgtk-3.so]
       ffi_lib %w[libgtkmm-2.4.so.1 libgtkmm-2.4.so libgtkmm-3.0.so.1 libgtkmm-3.0.so]
-      ffi_lib %w[libnotify.so.1 libnotify.so libnotify]
+      ffi_lib %w[libnotify.so.4 libnotify.so.3 libnotify.so.2 libnotify.so.1 libnotify.so libnotify]
       attach_functions!
     rescue LoadError => e
       warn e.message
