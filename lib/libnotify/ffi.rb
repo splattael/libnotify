@@ -5,10 +5,12 @@ module Libnotify
     extend ::FFI::Library
 
     def self.included(base)
-      # Workaround for "half-linked" libnotify.so. Does not work on rubinius!
+      # Workaround for "half-linked" libnotify.so. Does not work on rubinius (no ffi_lib_flags there)!
       # See: https://bugzilla.redhat.com/show_bug.cgi?id=626852
       ffi_lib_flags :lazy, :local, :global if respond_to?(:ffi_lib_flags)
-      ffi_lib %w[libnotify libnotify.so libnotify.so.1]
+      ffi_lib %w[libgtk-x11-2.0.so.0 libgtk-x11-2.0.so]
+      ffi_lib %w[libgtkmm-2.4.so.1 libgtkmm-2.4.so]
+      ffi_lib %w[libnotify.so.1 libnotify.so libnotify]
       attach_functions!
     rescue LoadError => e
       warn e.message
