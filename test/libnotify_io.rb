@@ -11,7 +11,7 @@ class LibnotifyIO
 
   def puts *o
     if o.first =~ /(\d+) failures, (\d+) errors/
-      description = [ RUBY_ENGINE, RUBY_VERSION, RUBY_PLATFORM ].join(" ")
+      description = [ defined?(RUBY_ENGINE) ? RUBY_ENGINE : "ruby", RUBY_VERSION, RUBY_PLATFORM ].join(" ")
       libnotify.body = o.first
       if $1.to_i > 0 || $2.to_i > 0 # fail?
         libnotify.summary = ":-( #{description}"
