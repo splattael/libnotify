@@ -56,6 +56,10 @@ You'll need libnotify. On Debian just type:
 * Peter Suschlik (http://github.com/splattael)
 * Dennis Collective (http://github.com/denniscollective)
 
+== License
+
+MIT License[http://www.opensource.org/licenses/mit-license.php]
+
 == TODO
 
 * Mock FFI calls with rrriot. (test/test_libnotify.rb:61)
