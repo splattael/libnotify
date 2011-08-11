@@ -56,6 +56,7 @@ You'll need libnotify. On Debian just type:
 
 * Peter Suschlik (http://github.com/splattael)
 * Dennis Collective (http://github.com/denniscollective)
+* Daniel Mack (http://github.com/zonque)
 
 == License
 
