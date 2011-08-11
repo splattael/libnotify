@@ -25,6 +25,7 @@ module Libnotify
       attach_function :notify_notification_set_urgency,     [:pointer, :int],                       :void
       attach_function :notify_notification_set_timeout,     [:pointer, :long],                      :void
       attach_function :notify_notification_set_hint_string, [:pointer, :string, :string],           :void
+      attach_function :notify_notification_set_hint_uint32, [:pointer, :string, :int],              :void
       attach_function :notify_notification_clear_hints,     [:pointer],                             :void
       attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
     end

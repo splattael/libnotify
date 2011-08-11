@@ -34,6 +34,7 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
     assert_nil            libnotify.timeout
     assert_nil            libnotify.icon_path
     assert                libnotify.append
+    assert               !libnotify.transient
   end
 
   def test_with_options_and_block
@@ -41,12 +42,14 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
       n.body      = "overwritten"
       n.icon_path = "/path/to/icon"
       n.append    = false
+      n.transient = true
     end
 
     assert_equal "hello",         libnotify.summary
     assert_equal "overwritten",   libnotify.body
     assert_equal "/path/to/icon", libnotify.icon_path
     assert                       !libnotify.append
+    assert                        libnotify.transient
   end
 
   def test_timeout_setter
