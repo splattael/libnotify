@@ -6,7 +6,7 @@ module Libnotify
     include FFI
 
     attr_reader :timeout, :icon_path
-    attr_accessor :summary, :body, :urgency, :append
+    attr_accessor :summary, :body, :urgency, :append, :transient
 
     class << self
       # List of globs to icons
@@ -49,6 +49,7 @@ module Libnotify
       self.urgency = :normal
       self.timeout = nil
       self.append = true
+      self.transient = false
     end
     private :set_defaults
 
@@ -64,9 +65,12 @@ module Libnotify
         notify_notification_set_hint_string(notify, "x-canonical-append", "")
         notify_notification_set_hint_string(notify, "append", "")
       end
+      if transient
+        notify_notification_set_hint_uint32(notify, "transient", 1)
+      end
       notify_notification_show(notify, nil)
     ensure
-      notify_notification_clear_hints(notify) if append
+      notify_notification_clear_hints(notify) if (append || transient)
     end
 
     # @todo Simplify timeout=
