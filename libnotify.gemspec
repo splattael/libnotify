@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   if needs_ffi
-    s.add_runtime_dependency      'ffi',          '= 1.0.9'
+    s.add_runtime_dependency      'ffi',          '= 1.0.10'
   end
 
   s.add_development_dependency  'minitest'
