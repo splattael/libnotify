@@ -1,5 +1,5 @@
 
-SUPPORTED_RUBIES = %w[ree 1.9.2 jruby rbx]
+SUPPORTED_RUBIES = %w[ree 1.9.2 1.9.3 jruby rbx]
 PLATFORMS = %w[ree rbx]
 GEMSPEC = Bundler::GemHelper.new(Dir.pwd).gemspec
 
