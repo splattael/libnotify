@@ -8,9 +8,9 @@ module Libnotify
       # Workaround for "half-linked" libnotify.so. Does not work on rubinius (no ffi_lib_flags there)!
       # See: https://bugzilla.redhat.com/show_bug.cgi?id=626852
       ffi_lib_flags :lazy, :local, :global if respond_to?(:ffi_lib_flags)
-      ffi_lib %w[libgtk-x11-2.0.so.0 libgtk-x11-2.0.so libgtk-3.so.0 libgtk-3.so],
-              %w[libgtkmm-2.4.so.1 libgtkmm-2.4.so libgtkmm-3.0.so.1 libgtkmm-3.0.so],
-              %w[libnotify.so.4 libnotify.so.3 libnotify.so.2 libnotify.so.1 libnotify.so libnotify]
+      ffi_lib %w[libgtk-x11-2.0 libgtk-x11-2.0.so.0 libgtk-x11-2.0.so libgtk-3 libgtk-3.so.0 libgtk-3.so],
+              %w[libgtkmm-2.4 libgtkmm-2.4.so.1 libgtkmm-2.4.so libgtkmm-3.0 libgtkmm-3.0.so.1 libgtkmm-3.0.so],
+              %w[libnotify libnotify.so.4 libnotify.so.3 libnotify.so.2 libnotify.so.1 libnotify.so]
       attach_functions!
     rescue LoadError => e
       warn e.message
