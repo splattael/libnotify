@@ -25,9 +25,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   if needs_ffi
-    s.add_runtime_dependency      'ffi',          '~> 1.0.0'
+    s.add_runtime_dependency    'ffi',          '~> 1.0.0'
   end
 
   s.add_development_dependency  'minitest'
+  s.add_development_dependency  'minitest-libnotify'
   s.add_development_dependency  'yard',           '~> 0.7.0'
 end
