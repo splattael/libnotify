@@ -2,7 +2,7 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 
 require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rubygems'
 load 'libnotify/tasks/rubies.rake'
 
