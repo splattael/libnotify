@@ -24,11 +24,11 @@ module Libnotify
   #   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
   #
   # @example Update pre-existing notification
-  #   @notification = Libnotify.new(:summary => "hello", :body => "world")
-  #   @notification.update # identical to show! if not shown before
+  #   n = Libnotify.new(:summary => "hello", :body => "world")
+  #   n.update # identical to show! if not shown before
   #   Kernel.sleep 1
-  #   @notification.update do |n|
-  #       n.summary = "goodbye"
+  #   n.update do |notify|
+  #     notify.summary = "goodbye"
   #   end
   #
   # @example Mixed syntax
