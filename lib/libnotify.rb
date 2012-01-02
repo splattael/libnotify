@@ -23,13 +23,15 @@ module Libnotify
   # @example Hash syntax
   #   Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
   #
-  # @example Update pre-existing notification
+  # @example Update pre-existing notification then close it
   #   n = Libnotify.new(:summary => "hello", :body => "world")
   #   n.update # identical to show! if not shown before
   #   Kernel.sleep 1
   #   n.update(:body => "my love") do |notify|
   #     notify.summary = "goodbye"
   #   end
+  #   Kernel.sleep 1
+  #   n.close
   #
   # @example Mixed syntax
   #   Libnotify.new(options) do |n|

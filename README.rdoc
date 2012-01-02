@@ -37,13 +37,15 @@ http://github.com/splattael/libnotify/raw/master/libnotify.png
   Libnotify.show(:icon_path => "emblem-default.png")
   Libnotify.show(:icon_path => :"emblem-default")
 
-  # Update pre-existing notification
+  # Update pre-existing notification then close it
   n = Libnotify.new(:summary => "hello", :body => "world")
   n.update # identical to show! if not shown before
   Kernel.sleep 1
   n.update(:body => "my love") do |notify|
     notify.summary = "goodbye"
   end
+  Kernel.sleep 1
+  n.close
 
 
 == Installation
