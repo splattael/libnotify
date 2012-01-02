@@ -82,7 +82,7 @@ module Libnotify
     def update(options={}, &block)
       apply_options(options, &block)
       if @notification
-        notify_notification_update(@notification, summary, body, icon_path)
+        notify_notification_update(@notification, summary, body, icon_path, nil)
         notify_notification_show(@notification, nil)
       else
         show!

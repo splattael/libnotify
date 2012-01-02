@@ -72,7 +72,7 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
   end
 
   def test_update
-    libnotify(:summary => "hello", :body => "world")
+    libnotify(:summary => "hello", :body => "world").show!
     libnotify.update(:summary => "hell") do |n|
       n.body = "yeah"
     end
