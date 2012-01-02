@@ -77,4 +77,4 @@ MIT License[http://www.opensource.org/licenses/mit-license.php]
 
 == TODO
 
-* Mock FFI calls with rrriot. (test/test_libnotify.rb:61)
+* refactor & test! (lib/libnotify/api.rb:21)
