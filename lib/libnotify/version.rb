@@ -1,3 +1,3 @@
 module Libnotify
-  VERSION = "0.7.0.pre2"
+  VERSION = "0.7.0"
 end
