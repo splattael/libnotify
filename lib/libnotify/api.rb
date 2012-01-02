@@ -40,9 +40,14 @@ module Libnotify
     # @see Libnotify.new
     def initialize(options={}, &block)
       set_defaults
+      apply_options(options, &block)
+    end
+
+    def apply_options(options={}, &block)
       options.each { |key, value| send("#{key}=", value) if respond_to?(key) }
       yield(self) if block_given?
     end
+    private :apply_options
 
     def set_defaults
       self.summary = self.body = ' '
