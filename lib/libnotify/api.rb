@@ -89,6 +89,11 @@ module Libnotify
       end
     end
 
+    # Close a previously shown notification.
+    def close
+      notify_notification_close(@notification, nil) if @notification
+    end
+
     # @todo Simplify timeout=
     def timeout=(timeout)
       @timeout = case timeout
