@@ -63,9 +63,13 @@ You'll need libnotify. On Debian just type:
 
 == Authors
 
-* Peter Suschlik (http://github.com/splattael)
-* Dennis Collective (http://github.com/denniscollective)
-* Daniel Mack (http://github.com/zonque)
+* Peter Suschlik (https://github.com/splattael)
+
+== Contributors
+
+* Dennis Collective (https://github.com/denniscollective)
+* Daniel Mack (https://github.com/zonque)
+* nuisanceofcats (https://github.com/nuisanceofcats)
 
 == License
 
