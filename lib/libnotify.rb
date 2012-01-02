@@ -27,7 +27,7 @@ module Libnotify
   #   n = Libnotify.new(:summary => "hello", :body => "world")
   #   n.update # identical to show! if not shown before
   #   Kernel.sleep 1
-  #   n.update do |notify|
+  #   n.update(:body => "my love") do |notify|
   #     notify.summary = "goodbye"
   #   end
   #

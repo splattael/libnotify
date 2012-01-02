@@ -71,6 +71,15 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
     assert_icon_path %r{^/.*/libnotify.png},  :"libnotify",             "with symbol"
   end
 
+  def test_update
+    libnotify(:summary => "hello", :body => "world")
+    libnotify.update(:summary => "hell") do |n|
+      n.body = "yeah"
+    end
+    assert_equal "hell", libnotify.summary
+    assert_equal "yeah", libnotify.body
+  end
+
   def test_integration
     skip "enable integration"
 

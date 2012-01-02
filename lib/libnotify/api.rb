@@ -79,10 +79,10 @@ module Libnotify
     end
 
     # Updates a previously shown notification.
-    def update(&block)
-      yield(self) if block_given?
+    def update(options={}, &block)
+      apply_options(options, &block)
       if @notification
-        notify_notification_update(@notification, summary, body, icon_path, nil)
+        p notify_notification_update(@notification, summary, body, icon_path)
         notify_notification_show(@notification, nil)
       else
         show!
