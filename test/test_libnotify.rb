@@ -24,7 +24,7 @@ class TestLibnotify < LibnotifyTestCase
       assert_nil            libnotify.timeout
       assert_nil            libnotify.icon_path
       assert                libnotify.append
-      assert               !libnotify.transient
+      refute                libnotify.transient
     end
 
     test "instance with options and block" do
@@ -38,7 +38,7 @@ class TestLibnotify < LibnotifyTestCase
       assert_equal "hello",         libnotify.summary
       assert_equal "overwritten",   libnotify.body
       assert_equal "/path/to/icon", libnotify.icon_path
-      assert                       !libnotify.append
+      refute                        libnotify.append
       assert                        libnotify.transient
     end
 
