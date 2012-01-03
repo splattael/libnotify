@@ -29,6 +29,7 @@ module Libnotify
       attach_function :notify_notification_set_hint_uint32, [:pointer, :string, :int],              :void
       attach_function :notify_notification_clear_hints,     [:pointer],                             :void
       attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
+      attach_function :notify_notification_close,           [:pointer, :pointer],                   :bool
     end
 
     def lookup_urgency(urgency)
