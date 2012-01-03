@@ -78,6 +78,7 @@ class TestLibnotifyAPI < MiniTest::Unit::TestCase
     end
     assert_equal "hell", libnotify.summary
     assert_equal "yeah", libnotify.body
+    libnotify.close
   end
 
   def test_integration
