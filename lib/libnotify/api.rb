@@ -1,3 +1,5 @@
+require 'libnotify/ffi'
+
 module Libnotify
   # API for Libnotify
   #

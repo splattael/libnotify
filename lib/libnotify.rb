@@ -1,3 +1,6 @@
+require 'libnotify/version'
+require 'libnotify/api'
+
 # Ruby bindings for libnotify using FFI.
 #
 # See README.rdoc for usage examples.
@@ -62,8 +65,4 @@ module Libnotify
   def self.show(options={}, &block)
     API.show(options, &block)
   end
-
-  autoload  :VERSION, 'libnotify/version'
-  autoload  :API,     'libnotify/api'
-  autoload  :FFI,     'libnotify/ffi'
 end
