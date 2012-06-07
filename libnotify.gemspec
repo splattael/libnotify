@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "libnotify"
+require "libnotify/version"
 
 platform = Gem::Platform::RUBY
 needs_ffi = true
