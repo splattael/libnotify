@@ -73,6 +73,7 @@ You'll need libnotify. On Debian just type:
 * Dennis Collective (https://github.com/denniscollective)
 * Daniel Mack (https://github.com/zonque)
 * nuisanceofcats (https://github.com/nuisanceofcats)
+* Jason Staten (https://github.com/statianzo)
 
 == License
 
