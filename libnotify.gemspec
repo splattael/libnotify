@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency 'ffi', '~> 1.0.11'
+  s.add_runtime_dependency 'ffi', '>= 1.0.11'
 
-  s.add_development_dependency 'yard', '~> 0.8.2'
-  s.add_development_dependency 'minitest', '~> 3.1.0'
-  s.add_development_dependency 'minitest-libnotify', '~> 0.2.2'
+  s.add_development_dependency 'yard', '>= 0.8.2'
+  s.add_development_dependency 'minitest', '>= 3.1.0'
+  s.add_development_dependency 'minitest-libnotify', '>= 0.2.2'
 end
