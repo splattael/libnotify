@@ -1,5 +1,7 @@
 = Libnotify
 
+{<img src="https://travis-ci.org/splattael/libnotify.png?branch=master" alt="Build Status" />}[https://travis-ci.org/splattael/libnotify] {<img src="https://badge.fury.io/rb/libnotify.png" alt="Gem Version" />}[http://badge.fury.io/rb/libnotify] {<img src="https://codeclimate.com/github/splattael/libnotify.png" />}[https://codeclimate.com/github/splattael/libnotify]
+
 Ruby bindings for libnotify using FFI.
 
 Gem[https://rubygems.org/gems/libnotify] |
