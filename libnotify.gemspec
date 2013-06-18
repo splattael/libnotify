@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'ffi', '>= 1.0.11'
 
-  s.add_development_dependency 'yard', '>= 0.8.2'
-  s.add_development_dependency 'minitest', '>= 3.1.0'
-  s.add_development_dependency 'minitest-libnotify', '>= 0.2.2'
+  s.add_development_dependency 'yard', '~> 0.8.6.1'
+  s.add_development_dependency 'minitest', '~> 4.7.4'
+  s.add_development_dependency 'minitest-libnotify', '~> 0.2.2'
 end
