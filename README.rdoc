@@ -66,6 +66,12 @@ You'll need libnotify. On Debian just type:
   bundle install
   rake
 
+== Caveats
+
+* +timeout+ and +append+ options might not work on Ubuntu.
+  See GH #21 for details.
+  https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
+
 == Authors
 
 * Peter Suschlik (https://github.com/splattael)
