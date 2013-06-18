@@ -116,7 +116,7 @@ module Libnotify
 
     # Sets icon path.
     #
-    # Path can be absolute, relative (will be resolved) or an symbol.
+    # Path can be absolute, relative (will be resolved) or a symbol.
     #
     # @todo document and refactor
     def icon_path=(path)
