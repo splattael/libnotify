@@ -24,6 +24,10 @@ module LibnotifyAssertions
       assert_equal expected, got, message
     end
   end
+
+  def fixture_file(path)
+    File.expand_path(File.join(File.dirname(__FILE__), "fixtures", path))
+  end
 end
 
 class LibnotifyTestCase < MiniTest::Spec
@@ -32,6 +36,8 @@ class LibnotifyTestCase < MiniTest::Spec
   class << self
     alias :test :it
     alias :context :describe
+    alias :setup :before
+    alias :teardown :after
   end
 
   def libnotify(options={}, &block)
