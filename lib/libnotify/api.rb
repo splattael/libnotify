@@ -121,7 +121,7 @@ module Libnotify
     # @todo document and refactor
     def icon_path=(path)
       case path
-      when /^\// # absolute
+      when %r{^/} # absolute
         @icon_path = path
       when String
         list = self.class.icon_dirs.map { |d| Dir[File.join(d, path)] }.flatten.sort(&ICON_SORTER)
