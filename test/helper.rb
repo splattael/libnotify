@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'simplecov' if ENV['COVERAGE'] == '1'
+
 require 'minitest/autorun'
 require 'minitest/libnotify'
 

@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard', '~> 0.8.6.1'
   s.add_development_dependency 'minitest', '~> 4.7.4'
   s.add_development_dependency 'minitest-libnotify', '~> 0.2.2'
+  s.add_development_dependency 'simplecov'
 end
