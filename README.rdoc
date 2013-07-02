@@ -66,6 +66,10 @@ You'll need libnotify. On Debian just type:
   bundle install
   rake
 
+=== Code coverage
+
+  COVERAGE=1 rake
+
 == Caveats
 
 * +timeout+ and +append+ options might not work on Ubuntu.
