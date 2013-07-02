@@ -1,4 +1,5 @@
 require 'libnotify/ffi'
+require 'libnotify/icon_finder'
 
 module Libnotify
   # API for Libnotify
@@ -19,23 +20,6 @@ module Libnotify
       "/usr/share/icons/gnome/*/emblems",
       "/usr/share/icons/gnome/*/emotes"
     ]
-
-    # TODO refactor & test!
-    ICON_REGEX = /(\d+)x\d/
-    ICON_SORTER = proc do |a, b|
-      ma = a.scan ICON_REGEX
-      mb = b.scan ICON_REGEX
-
-      if ma.first && mb.first
-        mb.first.first.to_i <=> ma.first.first.to_i
-      elsif ma.first && !mb.first
-        1
-      elsif !ma.first && ma.first
-        -1
-      else
-        a <=> b
-      end
-    end
 
     # Creates a notification object.
     #
@@ -121,11 +105,10 @@ module Libnotify
     # @todo document and refactor
     def icon_path=(path)
       case path
-      when /^\// # absolute
+      when %r{^/} # absolute
         @icon_path = path
       when String
-        list = self.class.icon_dirs.map { |d| Dir[File.join(d, path)] }.flatten.sort(&ICON_SORTER)
-        @icon_path = list.detect { |full_path| File.exist?(full_path) } || path
+        @icon_path = icon_for(path)
       when Symbol
         self.icon_path = "#{path}.png"
       else
@@ -141,5 +124,10 @@ module Libnotify
       new(options, &block).show!
     end
 
+    private
+
+    def icon_for(name)
+      IconFinder.new(self.class.icon_dirs).icon_path(name) || name
+    end
   end
 end
