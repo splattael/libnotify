@@ -93,4 +93,4 @@ MIT License[http://www.opensource.org/licenses/mit-license.php]
 
 == TODO
 
-* refactor & test! (lib/libnotify/api.rb:21)
+None.
