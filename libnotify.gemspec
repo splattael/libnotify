@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["peter-libnotify@suschlik.de"]
   s.homepage    = "http://rubygems.org/gems/libnotify"
   s.summary     = %q{Ruby bindings for libnotify using FFI}
+  s.license     = 'MIT'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
