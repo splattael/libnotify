@@ -93,6 +93,9 @@ MIT License[http://www.opensource.org/licenses/MIT]
 
 == TODO
 
+* Convert README to markdown
+  -> check rdoc generation
+
 * Unify show/update interface
   -> simplifies code
   
