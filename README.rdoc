@@ -89,8 +89,9 @@ You'll need libnotify. On Debian just type:
 
 == License
 
-MIT License[http://www.opensource.org/licenses/mit-license.php]
+MIT License[http://www.opensource.org/licenses/MIT]
 
 == TODO
 
 None.
+* 
