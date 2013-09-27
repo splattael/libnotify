@@ -93,5 +93,15 @@ MIT License[http://www.opensource.org/licenses/MIT]
 
 == TODO
 
-None.
-* 
+* Unify show/update interface
+  -> simplifies code
+  
+* Turn FFI module into a class
+  -> more plugabble
+
+* Support newer features of `libnotify`
+  -> actions, hints?
+  See https://developer-next.gnome.org/libnotify/0.7/NotifyNotification.html
+
+* Support older versions of `libnotify`
+  -> prior `0.4`?
