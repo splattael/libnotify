@@ -3,9 +3,9 @@ require 'libnotify/api'
 
 # Ruby bindings for libnotify using FFI.
 #
-# See README.rdoc for usage examples.
+# See README.md for usage examples.
 #
-# @see README.rdoc
+# @see README.md
 # @see Libnotify.new
 # @author Peter Suschlik
 module Libnotify
