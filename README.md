@@ -81,9 +81,11 @@ COVERAGE=1 rake
 
 ## Caveats
 
-* +timeout+ and +append+ options might not work on Ubuntu.
-  See GH #21 for details.
-  https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
+### Ubuntu
+
+`timeout` and `append` options might not work on Ubuntu.
+See GH #21 for details.
+https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 
 ## Authors
 
@@ -93,7 +95,7 @@ COVERAGE=1 rake
 
 * Dennis Collective (https://github.com/denniscollective)
 * Daniel Mack (https://github.com/zonque)
-* nuisanceofcats (https://github.com/nuisanceofcats)
+* Nuisance of Cats (https://github.com/nuisanceofcats)
 * Jason Staten (https://github.com/statianzo)
 
 ## License
