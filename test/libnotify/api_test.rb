@@ -54,4 +54,10 @@ class LibnotifyAPITest < LibnotifyTestCase
     assert_equal "yeah", libnotify.body
     libnotify.close
   end
+
+  test ".capabilities" do
+    caps = Libnotify::API.capabilities
+    assert_operator caps.size, :>, 1
+    assert caps.all? { |cap| String === cap }
+  end
 end

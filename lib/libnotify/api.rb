@@ -116,6 +116,11 @@ module Libnotify
       end
     end
 
+    # Returns a string list of Libnotify's capabilities.
+    def self.capabilities
+      FFI.notify_get_server_caps
+    end
+
     # Creates and shows a notification. It's a shortcut for +Libnotify.new(options).show!+.
     #
     # @see Libnotify.show

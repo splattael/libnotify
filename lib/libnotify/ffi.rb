@@ -4,6 +4,8 @@ module Libnotify
     require 'ffi'
     extend ::FFI::Library
 
+    require 'libnotify/glist'
+
     def self.included(base)
       load_libs
       attach_functions!
@@ -39,6 +41,9 @@ module Libnotify
       attach_function :notify_notification_clear_hints,     [:pointer],                             :void
       attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
       attach_function :notify_notification_close,           [:pointer, :pointer],                   :bool
+      callback :action_callback, [:pointer, :string, :pointer], :void
+
+      attach_function :notify_get_server_caps, [], Glist.by_ref
     end
 
     def lookup_urgency(urgency)
