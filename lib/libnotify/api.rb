@@ -61,12 +61,12 @@ module Libnotify
       clear_hints
     end
 
-    # Updates a previously shown notification.
+    # Updates a previously shown notification, or creates a new one
     def update(options={}, &block)
       apply_options(options, &block)
       if @notification
         notify_notification_update(@notification, summary, body, icon_path, nil)
-        notify_notification_show(@notification, nil)
+        show
       else
         show!
       end
