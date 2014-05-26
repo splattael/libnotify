@@ -44,32 +44,29 @@ module Libnotify
     end
     private :set_defaults
 
-    # Shows a notification.
-    #
-    # @see Libnotify.show
+    # Shows a new notification.
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
       @notification = notify_notification_new(summary, body, icon_path, nil)
-      notify_notification_set_urgency(@notification, lookup_urgency(urgency))
-      notify_notification_set_timeout(@notification, timeout || -1)
-      if append
-        notify_notification_set_hint_string(@notification, "x-canonical-append", "")
-        notify_notification_set_hint_string(@notification, "append", "")
-      end
-      if transient
-        notify_notification_set_hint_uint32(@notification, "transient", 1)
-      end
-      notify_notification_show(@notification, nil)
-    ensure
-      notify_notification_clear_hints(@notification) if (append || transient)
+      show
     end
 
-    # Updates a previously shown notification.
+    # Shows an existing notification
+    def show
+      notify_notification_set_urgency(@notification, lookup_urgency(urgency))
+      notify_notification_set_timeout(@notification, timeout || -1)
+      set_hints
+      notify_notification_show(@notification, nil)
+    ensure
+      clear_hints
+    end
+
+    # Updates a previously shown notification, or creates a new one
     def update(options={}, &block)
       apply_options(options, &block)
       if @notification
         notify_notification_update(@notification, summary, body, icon_path, nil)
-        notify_notification_show(@notification, nil)
+        show
       else
         show!
       end
@@ -125,6 +122,20 @@ module Libnotify
     end
 
     private
+
+    def set_hints
+      if append
+        notify_notification_set_hint_string(@notification, "x-canonical-append", "")
+        notify_notification_set_hint_string(@notification, "append", "")
+      end
+      if transient
+        notify_notification_set_hint_uint32(@notification, "transient", 1)
+      end
+    end
+
+    def clear_hints
+      notify_notification_clear_hints(@notification) if (append || transient)
+    end
 
     def icon_for(name)
       IconFinder.new(self.class.icon_dirs).icon_path(name) || name
