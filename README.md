@@ -91,7 +91,7 @@ https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 
 * Peter Suschlik (https://github.com/splattael)
 
-## Contributors
+## [Contributors](https://github.com/splattael/libnotify/graphs/contributors)
 
 * Dennis Collective (https://github.com/denniscollective)
 * Daniel Mack (https://github.com/zonque)
