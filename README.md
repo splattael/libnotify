@@ -97,6 +97,7 @@ https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 * Daniel Mack (https://github.com/zonque)
 * Nuisance of Cats (https://github.com/nuisanceofcats)
 * Jason Staten (https://github.com/statianzo)
+* Kero van Gelder (https://github.com/keroami)
 
 ## License
 
