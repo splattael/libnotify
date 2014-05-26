@@ -45,13 +45,15 @@ module Libnotify
     private :set_defaults
 
     # Shows a new notification.
+    #
+    # @see Libnotify.show
     def show!
       notify_init(self.class.to_s) or raise "notify_init failed"
       @notification = notify_notification_new(summary, body, icon_path, nil)
       show
     end
 
-    # Shows an existing notification
+    # Shows an existing notification.
     def show
       notify_notification_set_urgency(@notification, lookup_urgency(urgency))
       notify_notification_set_timeout(@notification, timeout || -1)
@@ -61,7 +63,7 @@ module Libnotify
       clear_hints
     end
 
-    # Updates a previously shown notification, or creates a new one
+    # Updates a previously shown notification or creates a new one.
     def update(options={}, &block)
       apply_options(options, &block)
       if @notification
