@@ -1,6 +1,6 @@
 # Libnotify
 
-[![Build Status](https://travis-ci.org/splattael/libnotify.png?branch=master)](https://travis-ci.org/splattael/libnotify) [![Gem Version](https://badge.fury.io/rb/libnotify.png)](http://badge.fury.io/rb/libnotify) [![Code Climate](https://codeclimate.com/github/splattael/libnotify.png)](https://codeclimate.com/github/splattael/libnotify) [![Inline docs](http://inch-pages.github.io/github/splattael/libnotify.png)](http://inch-pages.github.io/github/splattael/libnotify)
+[![Build Status](https://travis-ci.org/splattael/libnotify.png?branch=master)](https://travis-ci.org/splattael/libnotify) [![Gem Version](https://badge.fury.io/rb/libnotify.png)](http://badge.fury.io/rb/libnotify) [![Code Climate](https://codeclimate.com/github/splattael/libnotify.png)](https://codeclimate.com/github/splattael/libnotify) [![Inline docs](http://inch-ci.org/github/splattael/libnotify.png)](http://inch-ci.org/github/splattael/libnotify)
 
 Ruby bindings for libnotify using FFI.
 
