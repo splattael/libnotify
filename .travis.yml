@@ -4,5 +4,6 @@ rvm:
   - 2.0
   - 2.1
   - jruby
+  - rbx-2
 before_install:
   - "sudo apt-get install libnotify4"
