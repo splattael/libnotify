@@ -4,6 +4,8 @@ module Libnotify
     require 'ffi'
     extend ::FFI::Library
 
+    enum :urgency, [ :low, :normal, :critical ]
+
     # Load libnotify library and attach functions from C to Ruby via FFI.
     def self.included(base)
       load_libs
@@ -26,25 +28,18 @@ module Libnotify
               libnotify_libs
     end
 
-    URGENCY = [ :low, :normal, :critical ]
-
     def self.attach_functions! # :nodoc:
       attach_function :notify_init,                         [:string],                              :bool
       attach_function :notify_uninit,                       [],                                     :void
       attach_function :notify_notification_new,             [:string, :string, :string, :pointer],  :pointer
       attach_function :notify_notification_update,          [:pointer, :string, :string, :string, :pointer],  :pointer
-      attach_function :notify_notification_set_urgency,     [:pointer, :int],                       :void
+      attach_function :notify_notification_set_urgency,     [:pointer, :urgency],                   :void
       attach_function :notify_notification_set_timeout,     [:pointer, :long],                      :void
       attach_function :notify_notification_set_hint_string, [:pointer, :string, :string],           :void
       attach_function :notify_notification_set_hint_uint32, [:pointer, :string, :int],              :void
       attach_function :notify_notification_clear_hints,     [:pointer],                             :void
       attach_function :notify_notification_show,            [:pointer, :pointer],                   :bool
       attach_function :notify_notification_close,           [:pointer, :pointer],                   :bool
-    end
-
-    # Returns an +urgency+ symbol into an Integer used for FFI calls.
-    def lookup_urgency(urgency)
-      URGENCY.index(urgency)
     end
 
     def method_missing(method, *args, &block) # :nodoc:

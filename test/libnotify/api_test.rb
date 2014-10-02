@@ -54,4 +54,11 @@ class LibnotifyAPITest < LibnotifyTestCase
     assert_equal "yeah", libnotify.body
     libnotify.close
   end
+
+  test "raise ArgumentError for unknown urgency" do
+    e = assert_raises ArgumentError do
+      libnotify(:urgency => :unknown).show!
+    end
+    assert_equal "invalid enum value, :unknown", e.message
+  end
 end

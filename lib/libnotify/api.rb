@@ -55,7 +55,7 @@ module Libnotify
 
     # Shows an existing notification.
     def show
-      notify_notification_set_urgency(@notification, lookup_urgency(urgency))
+      notify_notification_set_urgency(@notification, urgency)
       notify_notification_set_timeout(@notification, timeout || -1)
       set_hints
       notify_notification_show(@notification, nil)
