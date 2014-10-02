@@ -8,7 +8,8 @@ Ruby bindings for libnotify using FFI.
 [Source](https://github.com/splattael/libnotify) |
 [RDoc](http://rubydoc.info/github/splattael/libnotify/master)
 
-![libnotify](http://github.com/splattael/libnotify/raw/master/libnotify.png)
+![libnotify](https://github.com/splattael/libnotify/raw/master/etc/libnotify-gnome3.png)
+![libnotify](https://github.com/splattael/libnotify/raw/master/etc/libnotify-ubuntu.png)
 
 ## Usage
 
