@@ -38,11 +38,11 @@ class LibnotifyAPITest < LibnotifyTestCase
   end
 
   test "icon_path=" do
-    Libnotify::API.icon_dirs << File.expand_path("../../..", __FILE__)
+    Libnotify::API.icon_dirs << File.expand_path("../../fixtures", __FILE__)
     assert_icon_path "/some/path/image.jpg",  "/some/path/image.jpg",   "with absolute path"
     assert_icon_path "some-invalid-path.jpg", "some-invalid-path.jpg",  "with non-existant relative path"
-    assert_icon_path %r{^/.*/libnotify.png},  "libnotify.png",          "with relative path"
-    assert_icon_path %r{^/.*/libnotify.png},  :"libnotify",             "with symbol"
+    assert_icon_path %r{^/.*/test/fixtures/libnotify.png}, "libnotify.png", "with relative path"
+    assert_icon_path %r{^/.*/test/fixtures/libnotify.png}, :"libnotify",    "with symbol"
   end
 
   test "update" do
