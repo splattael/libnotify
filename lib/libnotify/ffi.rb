@@ -4,6 +4,7 @@ module Libnotify
     require 'ffi'
     extend ::FFI::Library
 
+    # Load libnotify library and attach functions from C to Ruby via FFI.
     def self.included(base)
       load_libs
       attach_functions!
@@ -11,7 +12,7 @@ module Libnotify
       warn e.message
     end
 
-    def self.load_libs
+    def self.load_libs # :nodoc:
       libnotify_libs = %w[libnotify libnotify.so.4 libnotify.so.3 libnotify.so.2 libnotify.so.1 libnotify.so]
 
       # Workaround for "half-linked" libnotify.so. Does not work on rubinius (no ffi_lib_flags there)!
@@ -27,7 +28,7 @@ module Libnotify
 
     URGENCY = [ :low, :normal, :critical ]
 
-    def self.attach_functions!
+    def self.attach_functions! # :nodoc:
       attach_function :notify_init,                         [:string],                              :bool
       attach_function :notify_uninit,                       [],                                     :void
       attach_function :notify_notification_new,             [:string, :string, :string, :pointer],  :pointer
@@ -41,11 +42,12 @@ module Libnotify
       attach_function :notify_notification_close,           [:pointer, :pointer],                   :bool
     end
 
+    # Returns an +urgency+ symbol into an Integer used for FFI calls.
     def lookup_urgency(urgency)
       URGENCY.index(urgency)
     end
 
-    def method_missing(method, *args, &block)
+    def method_missing(method, *args, &block) # :nodoc:
       if method.to_s =~ /^notify_/
         warn "libnotify.so not found!"
       end
