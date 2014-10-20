@@ -7,7 +7,7 @@ module Libnotify
     enum :urgency, [ :low, :normal, :critical ]
 
     # Load libnotify library and attach functions from C to Ruby via FFI.
-    def self.included(base)
+    def self.included(_base)
       load_libs
       attach_functions!
     rescue LoadError => e

@@ -29,7 +29,7 @@ module Libnotify
       apply_options(options, &block)
     end
 
-    def apply_options(options={}, &block)
+    def apply_options(options={})
       options.each { |key, value| send("#{key}=", value) if respond_to?(key) }
       yield(self) if block_given?
     end

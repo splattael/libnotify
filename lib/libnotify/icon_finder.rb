@@ -14,8 +14,6 @@ module Libnotify
       end
     end
 
-    private
-
     class Icon
       attr_reader :fullpath
 
