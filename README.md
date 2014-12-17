@@ -51,7 +51,7 @@ end
 ```
 
 
-### Detecting/Changing/Overriding Icon Paths
+### Managing Icon Paths
 
 ```ruby
 require 'libnotify'
@@ -66,7 +66,6 @@ Libnotify.show(:icon_path => :"emblem-default")
 ### Updating existing notification and closing it
 
 ```ruby
-
 # Update pre-existing notification then close it
 n = Libnotify.new(:summary => "hello", :body => "world")
 n.update # identical to show! if not shown before
