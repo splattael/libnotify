@@ -13,10 +13,18 @@ Ruby bindings for libnotify using FFI.
 
 ## Usage
 
+### Hash Syntax
+
+```ruby
+require 'libnotify'
+Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
+```
+
+### Block Syntax
+
 ```ruby
 require 'libnotify'
 
-# Block syntax
 n = Libnotify.new do |notify|
   notify.summary    = "hello"
   notify.body       = "world"
@@ -26,29 +34,51 @@ n = Libnotify.new do |notify|
   notify.transient  = true        # default false - keep the notifications around after display
   notify.icon_path  = "/usr/share/icons/gnome/scalable/emblems/emblem-default.svg"
 end
-n.show!
 
-# Hash syntax
-Libnotify.show(:body => "hello", :summary => "world", :timeout => 2.5)
+n.show!
+```
+
+### Mixed Syntax
+
+```ruby
+require 'libnotify'
 
 # Mixed syntax
-Libnotify.show(options) do |n|
-  n.timeout = 1.5     # overrides :timeout in options
+options = {:body => "world", :timeout => 20}
+Libnotify.show(options) do |opts|
+  opts.timeout = 1.5     # overrides :timeout in options
 end
+```
+
+
+### Detecting/Changing/Overriding Icon Paths
+
+```ruby
+require 'libnotify'
 
 # Icon path auto-detection
-Libnotify.icon_dirs << "/usr/share/icons/gnome/*/"
+Libnotify::API.icon_dirs << "/usr/share/icons/gnome/*/"
 Libnotify.show(:icon_path => "emblem-default.png")
 Libnotify.show(:icon_path => :"emblem-default")
+```
+
+
+### Updating existing notification and closing it
+
+```ruby
 
 # Update pre-existing notification then close it
 n = Libnotify.new(:summary => "hello", :body => "world")
 n.update # identical to show! if not shown before
+
 Kernel.sleep 1
+
 n.update(:body => "my love") do |notify|
   notify.summary = "goodbye"
 end
+
 Kernel.sleep 1
+
 n.close
 ```
 
