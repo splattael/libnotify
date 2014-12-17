@@ -13,4 +13,8 @@ class LibnotifyTest < LibnotifyTestCase
     assert defined?(Libnotify::VERSION), "version is defined"
     assert Libnotify::VERSION
   end
+
+  test "delegates icons_dir" do
+    assert_equal Libnotify::API.icon_dirs, Libnotify.icon_dirs
+  end
 end

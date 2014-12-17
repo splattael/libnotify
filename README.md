@@ -57,7 +57,7 @@ end
 require 'libnotify'
 
 # Icon path auto-detection
-Libnotify::API.icon_dirs << "/usr/share/icons/gnome/*/"
+Libnotify.icon_dirs << "/usr/share/icons/gnome/*/"
 Libnotify.show(:icon_path => "emblem-default.png")
 Libnotify.show(:icon_path => :"emblem-default")
 ```

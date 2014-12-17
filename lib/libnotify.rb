@@ -65,4 +65,17 @@ module Libnotify
   def self.show(options={}, &block)
     API.show(options, &block)
   end
+
+  # Exposes a list of icon directories to resolve `icon_path`.
+  #
+  # @see Libnotify.show
+  #
+  # @example
+  #   Libnotify.icon_dirs << "/usr/share/icons/gnome/*/"
+  #   Libnotify.show(:icon_path => "emblem-default.png")
+  #
+  # @return Array<String> list of icon directories
+  def self.icon_dirs
+    API.icon_dirs
+  end
 end
