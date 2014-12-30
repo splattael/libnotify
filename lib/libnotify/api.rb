@@ -9,7 +9,7 @@ module Libnotify
     include FFI
 
     attr_reader :timeout, :icon_path
-    attr_accessor :summary, :body, :urgency, :append, :transient
+    attr_accessor :app_name, :summary, :body, :urgency, :append, :transient
 
     class << self
       # List of globs to icons
@@ -36,6 +36,7 @@ module Libnotify
     private :apply_options
 
     def set_defaults
+      self.app_name = self.class.to_s
       self.summary = self.body = ' '
       self.urgency = :normal
       self.timeout = nil
@@ -48,7 +49,7 @@ module Libnotify
     #
     # @see Libnotify.show
     def show!
-      notify_init(self.class.to_s) or raise "notify_init failed"
+      notify_init(app_name) or raise "notify_init failed"
       @notification = notify_notification_new(summary, body, icon_path, nil)
       show
     end

@@ -43,6 +43,7 @@ module Libnotify
   #   end
   #
   # @param [Hash] options  options creating a notification
+  # @option options [String] :app_name ('Libnotify::API') name of the application
   # @option options [String] :summary (' ') summary/title of the notification
   # @option options [String] :body (' ') the body
   # @option options [Fixnum, Float, nil, FalseClass, String] :timeout (nil) display duration of the notification.

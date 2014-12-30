@@ -2,23 +2,26 @@ require 'helper'
 
 class LibnotifyAPITest < LibnotifyTestCase
   test "instance default values" do
-    assert_equal " ",     libnotify.summary
-    assert_equal " ",     libnotify.body
-    assert_equal :normal, libnotify.urgency
-    assert_nil            libnotify.timeout
-    assert_nil            libnotify.icon_path
-    assert                libnotify.append
-    refute                libnotify.transient
+    assert_equal "Libnotify::API",  libnotify.app_name
+    assert_equal " ",               libnotify.summary
+    assert_equal " ",               libnotify.body
+    assert_equal :normal,           libnotify.urgency
+    assert_nil                      libnotify.timeout
+    assert_nil                      libnotify.icon_path
+    assert                          libnotify.append
+    refute                          libnotify.transient
   end
 
   test "instance with options and block" do
     libnotify(:summary => "hello", :body => "body", :invalid_option => 23) do |n|
+      n.app_name  = "foo"
       n.body      = "overwritten"
       n.icon_path = "/path/to/icon"
       n.append    = false
       n.transient = true
     end
 
+    assert_equal "foo",           libnotify.app_name
     assert_equal "hello",         libnotify.summary
     assert_equal "overwritten",   libnotify.body
     assert_equal "/path/to/icon", libnotify.icon_path
