@@ -16,3 +16,4 @@ matrix:
   fast_finish: true
 before_install:
   - "sudo apt-get install libnotify4"
+  - "gem install bundler"
