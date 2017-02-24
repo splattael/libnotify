@@ -131,6 +131,7 @@ https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 * Kero van Gelder (https://github.com/keroami)
 * René Föhring (https://github.com/rrrene)
 * Cezary Baginski (https://github.com/e2)
+* robisacommonusername (https://github.com/robisacommonusername)
 
 ## License
 
