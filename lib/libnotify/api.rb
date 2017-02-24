@@ -50,7 +50,8 @@ module Libnotify
     # @see Libnotify.show
     def show!
       notify_init(app_name) or raise "notify_init failed"
-      @notification = notify_notification_new(summary, body, icon_path, nil)
+      raw_ptr = notify_notification_new(summary, body, icon_path, nil)
+      @notification = ::FFI::AutoPointer.new(raw_ptr, method(:g_object_unref))
       show
     end
 
