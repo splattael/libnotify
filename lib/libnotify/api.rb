@@ -86,7 +86,7 @@ module Libnotify
       @timeout = case timeout
       when Float
         (timeout * 1000).to_i
-      when Fixnum
+      when Integer
         if timeout >= 100 # assume miliseconds
           timeout
         else
