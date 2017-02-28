@@ -132,6 +132,7 @@ https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 * René Föhring (https://github.com/rrrene)
 * Cezary Baginski (https://github.com/e2)
 * robisacommonusername (https://github.com/robisacommonusername)
+* Fernando Briano (https://github.com/picandocodigo)
 
 ## License
 
