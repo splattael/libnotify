@@ -119,7 +119,7 @@ https://github.com/splattael/libnotify/issues/21#issuecomment-19114127
 
 ## Authors
 
-* Peter Suschlik (https://github.com/splattael)
+* Peter Leitzen (https://github.com/splattael)
 
 ## [Contributors](https://github.com/splattael/libnotify/graphs/contributors)
 
