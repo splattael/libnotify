@@ -3,16 +3,14 @@ rvm:
   - 1.9.3
   - 2.0
   - 2.1
-  - 2.2.4
-  - 2.3.0
-  - 2.4.0
+  - 2.2.9
+  - 2.3.5
+  - 2.4.2
+  - jruby-9.1.15
   - ruby-head
-  - jruby
-  - jruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-head
   fast_finish: true
 before_install:
   - "sudo apt-get install libnotify4"
