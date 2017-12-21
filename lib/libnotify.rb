@@ -7,7 +7,6 @@ require 'libnotify/api'
 #
 # @see README.md
 # @see Libnotify.new
-# @author Peter Suschlik
 module Libnotify
   # Creates a notification.
   #
@@ -56,14 +55,14 @@ module Libnotify
   # @yieldparam [API] notify the notification object
   #
   # @return [API] the notification object
-  def self.new(options={}, &block)
+  def self.new(options = {}, &block)
     API.new(options, &block)
   end
 
   # Shows a notification. It takes the same +options+ as Libnotify.new.
   #
   # @see Libnotify.new
-  def self.show(options={}, &block)
+  def self.show(options = {}, &block)
     API.show(options, &block)
   end
 

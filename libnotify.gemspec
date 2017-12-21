@@ -5,7 +5,7 @@ require "libnotify/version"
 Gem::Specification.new do |s|
   s.name        = "libnotify"
   s.version     = Libnotify::VERSION
-  s.authors     = ["Peter Suschlik"]
+  s.authors     = ["Peter Leitzen"]
   s.email       = ["peter-libnotify@suschlik.de"]
   s.homepage    = "http://rubygems.org/gems/libnotify"
   s.summary     = %q{Ruby bindings for libnotify using FFI}
